@@ -50,6 +50,8 @@ export default function Register() {
 						<hr
 							style={{
 								width: "100%",
+								marginTop: "16px",
+								marginBottom: "15px",
 								// borderColor: "rgba(0, 0, 0, 0.12);",
 							}}></hr>
 

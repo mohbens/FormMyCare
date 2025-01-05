@@ -1,19 +1,27 @@
+import PhoneIcon from "@mui/icons-material/Phone";
+import SmartphoneIcon from "@mui/icons-material/Smartphone";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import {
 	Autocomplete,
+	Box,
+	Button,
 	FormControl,
 	FormControlLabel,
 	FormLabel,
+	InputAdornment,
 	InputLabel,
 	MenuItem,
 	Radio,
 	RadioGroup,
 	Select,
 	TextField,
+	ThemeProvider,
 } from "@mui/material";
-import { Grid, width } from "@mui/system";
+import { createTheme, Grid, width } from "@mui/system";
 import React, { use, useEffect, useState } from "react";
 import franceData from "../data/france.json";
 import belgiumData from "../data/belgique.json";
+import { deepOrange, lime, purple } from "@mui/material/colors";
 
 const initialValues = {
 	civilité: "male",
@@ -34,6 +42,13 @@ const initialValues = {
 };
 
 export default function Form() {
+	const theme = createTheme({
+		palette: {
+			primary: deepOrange,
+			secondary: lime,
+		},
+	});
+
 	const [values, setValues] = useState(initialValues);
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -86,6 +101,7 @@ export default function Form() {
 				spacing={2}
 				justifyContent="center"
 				alignItems="center"
+
 				// sx={{ padding: "16px" }}
 			>
 				<Grid
@@ -94,47 +110,48 @@ export default function Form() {
 					sm={6}
 					sx={{ justifyContent: "space-between" }}
 					style={{ display: "flex", width: "100%" }}>
-					<RadioGroup
-						sx={{
-							border: "1px solid rgba(0, 0, 0, 0.23)",
-							borderRadius: "4px",
-							padding: "8px",
-							display: "flex",
-							flexDirection: "row",
-							alignItems: "center",
-						}}
-						row
-						name="civilité"
-						value={values.civilité}
-						onChange={handleInputChange}>
-						<FormControlLabel
-							value="male"
-							control={
-								<Radio
-									sx={{
-										"&.Mui-checked": {
-											color: "rgb(229, 115, 115)",
-										},
-									}}
-								/>
-							}
-							label="M."
-						/>
-						<FormControlLabel
-							value="female"
-							control={
-								<Radio
-									sx={{
-										"&.Mui-checked": {
-											color: "rgb(229, 115, 115)",
-										},
-									}}
-								/>
-							}
-							label="Mme"
-						/>
-					</RadioGroup>
-
+					<Box sx={{ width: "48%" }}>
+						<RadioGroup
+							sx={{
+								border: "1px solid rgba(0, 0, 0, 0.23)",
+								borderRadius: "4px",
+								padding: "8px",
+								display: "flex",
+								flexDirection: "row",
+								alignItems: "center",
+							}}
+							row
+							name="civilité"
+							value={values.civilité}
+							onChange={handleInputChange}>
+							<FormControlLabel
+								value="male"
+								control={
+									<Radio
+										sx={{
+											"&.Mui-checked": {
+												color: "rgb(229, 115, 115)",
+											},
+										}}
+									/>
+								}
+								label="M."
+							/>
+							<FormControlLabel
+								value="female"
+								control={
+									<Radio
+										sx={{
+											"&.Mui-checked": {
+												color: "rgb(229, 115, 115)",
+											},
+										}}
+									/>
+								}
+								label="Mme"
+							/>
+						</RadioGroup>
+					</Box>
 					<FormControl sx={{ width: "48%" }}>
 						<InputLabel id="demo-simple-select-helper-label">
 							Langue *
@@ -227,11 +244,9 @@ export default function Form() {
 						justifyContent: "space-between",
 					}}>
 					<FormControl sx={{ width: "48%" }}>
-						<InputLabel id="demo-simple-select-helper-label">
-							Spécialité
-						</InputLabel>
+						<InputLabel id="demo-simple-select-helper-label">Pays *</InputLabel>
 						<Select
-							label="Spécialité*"
+							label="Pays*"
 							value={country}
 							// defaultValue={country}
 							onChange={(e) => setCountry(e.target.value)}
@@ -243,36 +258,151 @@ export default function Form() {
 							))}
 						</Select>
 					</FormControl>
-
-					<Autocomplete
-						options={cities}
-						inputValue={inputValue}
-						onInputChange={(event, newInputValue) => {
-							setInputValue(newInputValue);
-							console.log("newInput", newInputValue);
-						}}
-						renderInput={(params) => (
-							<TextField {...params} label="City" variant="outlined" />
-						)}
-						// onChange={(event, newValue) => {}}
-						sx={{ width: "29%" }}
-						componentsProps={{
-							paper: {
-								sx: {
-									width: "300px",
-									maxHeight: "500px",
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+							width: "48%",
+						}}>
+						<Autocomplete
+							style={{ scrollbarwidth: "thin" }}
+							options={cities}
+							inputValue={inputValue}
+							onInputChange={(event, newInputValue) => {
+								setInputValue(newInputValue);
+								console.log("newInput", newInputValue);
+							}}
+							renderInput={(params) => (
+								<TextField {...params} label="Ville *" variant="outlined" />
+							)}
+							// onChange={(event, newValue) => {}}
+							sx={{ width: "70%" }}
+							componentsProps={{
+								paper: {
+									sx: {
+										"&::-webkit-scrollbar": {
+											width: "20px",
+										},
+										"&::-webkit-scrollbar-track": {
+											backgroundColor: "orange",
+										},
+										"&::-webkit-scrollbar-thumb": {
+											backgroundColor: "green",
+											borderRadius: 2,
+										},
+										mt: "4px",
+										width: "265px",
+										maxHeight: "500px",
+										border: "2px solid rgba(0, 0, 255 )",
+										scrollbarwidth: "thin",
+									},
 								},
-							},
+							}}
+						/>
+						<TextField
+							label="CP"
+							variant="outlined"
+							disabled
+							value={CP}
+							sx={{ width: "27%" }}
+						/>{" "}
+					</Box>
+				</Grid>
+				{/* //////////////////5em ligne ///////////// */}
+				<Grid
+					sx={{
+						width: "100%",
+						display: "flex",
+						justifyContent: "space-between",
+					}}>
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+							width: "48%",
+						}}>
+						<TextField label="Numéro *" sx={{ width: "48%" }}></TextField>
+						<TextField label="boîte" sx={{ width: "48%" }}></TextField>
+					</Box>
+					<TextField label="Adresse *" sx={{ width: "48%" }}></TextField>
+				</Grid>
+				{/* //////////////////6em ligne ///////////// */}
+				<Grid
+					sx={{
+						justifyContent: "space-between",
+						width: "100%",
+						display: "flex",
+					}}>
+					<TextField
+						label="Téléphone *"
+						sx={{ width: "48%" }}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<PhoneIcon />
+								</InputAdornment>
+							),
 						}}
 					/>
-
 					<TextField
-						label="CP"
-						variant="outlined"
-						disabled
-						value={CP}
-						sx={{ width: "15%" }}
+						label="Mobile *"
+						sx={{ width: "48%" }}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<SmartphoneIcon />
+								</InputAdornment>
+							),
+						}}
 					/>
+				</Grid>
+				{/* //////////////////6em ligne ///////////// */}
+				<Grid
+					sx={{
+						justifyContent: "space-between",
+						width: "100%",
+						display: "flex",
+					}}>
+					<TextField
+						label="Email *"
+						sx={{ width: "48%" }}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<AlternateEmailIcon />
+								</InputAdornment>
+							),
+						}}
+					/>
+					<TextField
+						label="Confirmation *"
+						sx={{ width: "48%" }}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<AlternateEmailIcon />
+								</InputAdornment>
+							),
+						}}
+					/>
+				</Grid>
+				<Grid
+					sx={{
+						width: "100%",
+
+						justifyContent: "center",
+						alignItems: "center",
+					}}>
+					<Button
+						Theme={theme}
+						sx={{ width: "100%" }}
+						color="primary"
+						variant="contained">
+						CRéER VOTRE COMPTE
+					</Button>
+					<p style={{ marginTop: "20px", color: "red" }}>
+						Deja membre ?S'identifier
+					</p>
 				</Grid>
 			</Grid>
 		</form>
