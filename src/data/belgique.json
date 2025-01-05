@@ -1,0 +1,162 @@
+[
+	{
+		"Code_commune_INSEE": 11164,
+		"Nom_commune": "GINESTAS",
+		"Code_postal": 11120,
+		"Libelle_acheminement": "GINESTAS",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.2793720392, 2.88392060651"
+	},
+	{
+		"Code_commune_INSEE": 11169,
+		"Nom_commune": "GREFFEIL",
+		"Code_postal": 11250,
+		"Libelle_acheminement": "GREFFEIL",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.0946347739, 2.34321262347"
+	},
+	{
+		"Code_commune_INSEE": 11170,
+		"Nom_commune": "GRUISSAN",
+		"Code_postal": 11430,
+		"Libelle_acheminement": "GRUISSAN",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.1033671547, 3.08203415117"
+	},
+	{
+		"Code_commune_INSEE": 11172,
+		"Nom_commune": "HOMPS",
+		"Code_postal": 11200,
+		"Libelle_acheminement": "HOMPS",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.1662010238, 2.78892059953"
+	},
+	{
+		"Code_commune_INSEE": 11175,
+		"Nom_commune": "ISSEL",
+		"Code_postal": 11400,
+		"Libelle_acheminement": "ISSEL",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.3333084343, 1.97819883163"
+	},
+	{
+		"Code_commune_INSEE": 11177,
+		"Nom_commune": "JOUCOU",
+		"Code_postal": 11140,
+		"Libelle_acheminement": "JOUCOU",
+		"Ligne_5": "",
+		"coordonnees_gps": "42.7657925357, 2.16672255446"
+	},
+	{
+		"Code_commune_INSEE": 11180,
+		"Nom_commune": "LABASTIDE ESPARBAIRENQUE",
+		"Code_postal": 11380,
+		"Libelle_acheminement": "LABASTIDE ESPARBAIRENQUE",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.3945963595, 2.38722889335"
+	},
+	{
+		"Code_commune_INSEE": 11182,
+		"Nom_commune": "LACOMBE",
+		"Code_postal": 11310,
+		"Libelle_acheminement": "LACOMBE",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.3722409402, 2.17410983728"
+	},
+	{
+		"Code_commune_INSEE": 11185,
+		"Nom_commune": "LAGRASSE",
+		"Code_postal": 11220,
+		"Libelle_acheminement": "LAGRASSE",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.0809470716, 2.59145854442"
+	},
+	{
+		"Code_commune_INSEE": 11189,
+		"Nom_commune": "LAPRADE",
+		"Code_postal": 11390,
+		"Libelle_acheminement": "LAPRADE",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.3925599417, 2.2792029886"
+	},
+	{
+		"Code_commune_INSEE": 11190,
+		"Nom_commune": "LA REDORTE",
+		"Code_postal": 11700,
+		"Libelle_acheminement": "LA REDORTE",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.2164263433, 2.63518086038"
+	},
+	{
+		"Code_commune_INSEE": 11192,
+		"Nom_commune": "LASBORDES",
+		"Code_postal": 11400,
+		"Libelle_acheminement": "LASBORDES",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.3333084343, 1.97819883163"
+	},
+	{
+		"Code_commune_INSEE": 11196,
+		"Nom_commune": "LAURAC",
+		"Code_postal": 11270,
+		"Libelle_acheminement": "LAURAC",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.1822151687, 1.96656505821"
+	},
+	{
+		"Code_commune_INSEE": 11202,
+		"Nom_commune": "LEUCATE",
+		"Code_postal": 11370,
+		"Libelle_acheminement": "LEUCATE",
+		"Ligne_5": "",
+		"coordonnees_gps": "42.8990754596, 3.02622378383"
+	},
+	{
+		"Code_commune_INSEE": 11202,
+		"Nom_commune": "LEUCATE",
+		"Code_postal": 11370,
+		"Libelle_acheminement": "LEUCATE",
+		"Ligne_5": "PORT LEUCATE",
+		"coordonnees_gps": "42.8990754596, 3.02622378383"
+	},
+	{
+		"Code_commune_INSEE": 11212,
+		"Nom_commune": "MAILHAC",
+		"Code_postal": 11120,
+		"Libelle_acheminement": "MAILHAC",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.2793720392, 2.88392060651"
+	},
+	{
+		"Code_commune_INSEE": 11226,
+		"Nom_commune": "MAYREVILLE",
+		"Code_postal": 11420,
+		"Libelle_acheminement": "MAYREVILLE",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.2067830751, 1.79388571157"
+	},
+	{
+		"Code_commune_INSEE": 11230,
+		"Nom_commune": "MERIAL",
+		"Code_postal": 11140,
+		"Libelle_acheminement": "MERIAL",
+		"Ligne_5": "",
+		"coordonnees_gps": "42.7657925357, 2.16672255446"
+	},
+	{
+		"Code_commune_INSEE": 11241,
+		"Nom_commune": "MONTBRUN DES CORBIERES",
+		"Code_postal": 11700,
+		"Libelle_acheminement": "MONTBRUN DES CORBIERES",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.2164263433, 2.63518086038"
+	},
+	{
+		"Code_commune_INSEE": 11242,
+		"Nom_commune": "MONTCLAR",
+		"Code_postal": 11250,
+		"Libelle_acheminement": "MONTCLAR",
+		"Ligne_5": "",
+		"coordonnees_gps": "43.0946347739, 2.34321262347"
+	}
+]
