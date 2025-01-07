@@ -1,11 +1,9 @@
+import { Card, Grid, Typography } from "@mui/material";
 import React from "react";
-import { Card, Grid, Container, Typography, Paper } from "@mui/material";
-import "../styles/register.css";
-
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import Form from "../components/Form";
-
-export default function Register() {
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import Identification from "../components/Identification";
+export default function Login() {
 	return (
 		<div
 			style={{
@@ -37,15 +35,13 @@ export default function Register() {
 
 								alignItems: "center",
 							}}>
-							<PersonAddAlt1Icon
-								sx={{ width: "50px", height: "50px", mr: "8px" }}
-							/>
+							<LockOpenIcon sx={{ width: "50px", height: "50px", mr: "8px" }} />
 							<Typography
 								variant="h5"
 								sx={{ color: "black", fontWeight: "bold" }}>
 								Bienvenue sur <span style={{ color: "red" }}>MyCareFlex</span>
 								<Typography variant="h6" style={{ fontSize: "0.875rem" }}>
-									Créer votre compte
+									Veuillez vous identifier
 								</Typography>
 							</Typography>
 						</div>
@@ -56,8 +52,7 @@ export default function Register() {
 								marginBottom: "15px",
 								// borderColor: "rgba(0, 0, 0, 0.12);",
 							}}></hr>
-
-						<Form />
+						<Identification />
 					</Card>
 				</Grid>
 			</div>

@@ -15,22 +15,22 @@ import {
 	RadioGroup,
 	Select,
 	TextField,
-	ThemeProvider,
 } from "@mui/material";
-import { createTheme, Grid, width } from "@mui/system";
+import { Grid, width } from "@mui/system";
 import React, { use, useEffect, useState } from "react";
 import franceData from "../data/france.json";
 import belgiumData from "../data/belgique.json";
 import { deepOrange, lime, purple } from "@mui/material/colors";
+import { Link } from "react-router-dom";
 
 const initialValues = {
 	civilité: "male",
-	langue: "",
+	langue: "Français",
 	prenom: "",
 	nom: "",
-	proffession: "",
+	profession: "Chirurgien Dentiste",
 	specialité: "",
-	pays: "",
+	pays: "France",
 	ville: "",
 	cp: "",
 	numero: "",
@@ -42,13 +42,6 @@ const initialValues = {
 };
 
 export default function Form() {
-	const theme = createTheme({
-		palette: {
-			primary: deepOrange,
-			secondary: lime,
-		},
-	});
-
 	const [values, setValues] = useState(initialValues);
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -96,21 +89,12 @@ export default function Form() {
 
 	return (
 		<form>
-			<Grid
-				container
-				spacing={2}
-				justifyContent="center"
-				alignItems="center"
-
-				// sx={{ padding: "16px" }}
-			>
+			<Grid container spacing={2} justifyContent="center" alignItems="center">
 				<Grid
 					item
-					xs={12}
-					sm={6}
 					sx={{ justifyContent: "space-between" }}
 					style={{ display: "flex", width: "100%" }}>
-					<Box sx={{ width: "48%" }}>
+					<Grid sx={{ width: "48%" }}>
 						<RadioGroup
 							sx={{
 								border: "1px solid rgba(0, 0, 0, 0.23)",
@@ -151,7 +135,7 @@ export default function Form() {
 								label="Mme"
 							/>
 						</RadioGroup>
-					</Box>
+					</Grid>
 					<FormControl sx={{ width: "48%" }}>
 						<InputLabel id="demo-simple-select-helper-label">
 							Langue *
@@ -159,7 +143,7 @@ export default function Form() {
 						<Select
 							labelId="demo-simple-select-helper-label"
 							id="demo-simple-select-helper"
-							// value={age}
+							value={values.langue}
 							label="Langue *"
 							sx={{ width: "100%" }}
 							onChange={handleInputChange}>
@@ -177,18 +161,26 @@ export default function Form() {
 					<TextField
 						variant="outlined"
 						label="Prenom *"
+						placeholder="Prenom"
 						name="prenom"
 						value={values.prenom}
 						onChange={handleInputChange}
 						sx={{ width: "48%" }}
+						InputLabelProps={{
+							style: { fontWeight: 600 },
+						}}
 					/>
 					<TextField
 						variant="outlined"
 						label="Nom *"
+						placeholder="Nom"
 						name="nom"
 						value={values.nom}
 						onChange={handleInputChange}
 						sx={{ width: "48%" }}
+						InputLabelProps={{
+							style: { fontWeight: 600 },
+						}}
 					/>
 				</Grid>
 				<Grid
@@ -202,14 +194,17 @@ export default function Form() {
 							Profession *
 						</InputLabel>
 						<Select
+							disabled
 							labelId="demo-simple-select-helper-label"
 							id="demo-simple-select-helper"
-							// value={age}
+							value={values.profession}
 							label="Profession *"
 							sx={{ width: "100%" }}
 							onChange={handleInputChange}>
-							<MenuItem value="Français">Français</MenuItem>
-							<MenuItem value="Anglais">Anglais</MenuItem>
+							<MenuItem value="Chirurgien Dentiste">
+								Chirurgien Dentiste
+							</MenuItem>
+							{/* <MenuItem value="Anglais">Anglais</MenuItem> */}
 						</Select>
 					</FormControl>
 					<FormControl sx={{ width: "48%" }}>
@@ -248,7 +243,7 @@ export default function Form() {
 						<Select
 							label="Pays*"
 							value={country}
-							// defaultValue={country}
+							defaultValue={values.pays}
 							onChange={(e) => setCountry(e.target.value)}
 							sx={{ width: "100%" }}>
 							{countries.map((option) => (
@@ -273,7 +268,14 @@ export default function Form() {
 								console.log("newInput", newInputValue);
 							}}
 							renderInput={(params) => (
-								<TextField {...params} label="Ville *" variant="outlined" />
+								<TextField
+									{...params}
+									label="Ville *"
+									variant="outlined"
+									InputLabelProps={{
+										style: { fontWeight: 600 },
+									}}
+								/>
 							)}
 							// onChange={(event, newValue) => {}}
 							sx={{ width: "70%" }}
@@ -300,6 +302,9 @@ export default function Form() {
 							}}
 						/>
 						<TextField
+							InputLabelProps={{
+								style: { fontWeight: 600 },
+							}}
 							label="CP"
 							variant="outlined"
 							disabled
@@ -321,10 +326,28 @@ export default function Form() {
 							justifyContent: "space-between",
 							width: "48%",
 						}}>
-						<TextField label="Numéro *" sx={{ width: "48%" }}></TextField>
-						<TextField label="boîte" sx={{ width: "48%" }}></TextField>
+						<TextField
+							InputLabelProps={{
+								style: { fontWeight: 600 },
+							}}
+							label="Numéro *"
+							placeholder="Numéro"
+							sx={{ width: "48%" }}></TextField>
+						<TextField
+							InputLabelProps={{
+								style: { fontWeight: 600 },
+							}}
+							label="boîte"
+							placeholder="Box"
+							sx={{ width: "48%" }}></TextField>
 					</Box>
-					<TextField label="Adresse *" sx={{ width: "48%" }}></TextField>
+					<TextField
+						InputLabelProps={{
+							style: { fontWeight: 600 },
+						}}
+						label="Adresse *"
+						placeholder="Adresse"
+						sx={{ width: "48%" }}></TextField>
 				</Grid>
 				{/* //////////////////6em ligne ///////////// */}
 				<Grid
@@ -334,7 +357,11 @@ export default function Form() {
 						display: "flex",
 					}}>
 					<TextField
+						InputLabelProps={{
+							style: { fontWeight: 600 },
+						}}
 						label="Téléphone *"
+						placeholder="Téléphone"
 						sx={{ width: "48%" }}
 						InputProps={{
 							startAdornment: (
@@ -345,7 +372,11 @@ export default function Form() {
 						}}
 					/>
 					<TextField
+						InputLabelProps={{
+							style: { fontWeight: 600 },
+						}}
 						label="Mobile *"
+						placeholder="Mobile"
 						sx={{ width: "48%" }}
 						InputProps={{
 							startAdornment: (
@@ -364,7 +395,11 @@ export default function Form() {
 						display: "flex",
 					}}>
 					<TextField
+						InputLabelProps={{
+							style: { fontWeight: 600 },
+						}}
 						label="Email *"
+						placeholder="Email"
 						sx={{ width: "48%" }}
 						InputProps={{
 							startAdornment: (
@@ -375,7 +410,11 @@ export default function Form() {
 						}}
 					/>
 					<TextField
+						InputLabelProps={{
+							style: { fontWeight: 600 },
+						}}
 						label="Confirmation *"
+						placeholder="Confirmation"
 						sx={{ width: "48%" }}
 						InputProps={{
 							startAdornment: (
@@ -394,15 +433,19 @@ export default function Form() {
 						alignItems: "center",
 					}}>
 					<Button
-						Theme={theme}
-						sx={{ width: "100%" }}
+						sx={{
+							width: "100%",
+							mb: "24px",
+							height: "42px",
+							fontSize: "0.9375rem",
+						}}
 						color="primary"
 						variant="contained">
 						CRéER VOTRE COMPTE
 					</Button>
-					<p style={{ marginTop: "20px", color: "red" }}>
+					<Link to="/login" style={{ color: "red", textDecoration: "none" }}>
 						Deja membre ?S'identifier
-					</p>
+					</Link>
 				</Grid>
 			</Grid>
 		</form>
