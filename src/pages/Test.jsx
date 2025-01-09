@@ -1,72 +1,49 @@
+import React, { useEffect, useState } from "react";
+import {
+	// Grid,
+	RadioGroup,
+	FormControlLabel,
+	Radio,
+	FormControl,
+	InputLabel,
+	Select,
+	MenuItem,
+	TextField,
+	Button,
+	Box,
+	Autocomplete,
+	InputAdornment,
+} from "@mui/material";
+import Grid from "@mui/material/Grid";
 import PhoneIcon from "@mui/icons-material/Phone";
 import SmartphoneIcon from "@mui/icons-material/Smartphone";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import {
-	Autocomplete,
-	Box,
-	Button,
-	FormControl,
-	FormControlLabel,
-	FormLabel,
-	InputAdornment,
-	InputLabel,
-	MenuItem,
-	Radio,
-	RadioGroup,
-	Select,
-	TextField,
-} from "@mui/material";
-import Grid from "@mui/material/Grid";
-import React, { use, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import franceData from "../data/france.json";
 import belgiumData from "../data/belgique.json";
-import { deepOrange, lime, purple } from "@mui/material/colors";
-import { Link } from "react-router-dom";
+const MyForm = () => {
+	const [values, setValues] = useState({
+		civilité: "",
+		langue: "",
+		prenom: "",
+		nom: "",
+		profession: "Chirurgien Dentiste",
+		spécialité: "",
+		pays: "France",
+		ville: "",
+		CP: "",
+		numéro: "",
+		boîte: "",
+		adresse: "",
+		téléphone: "",
+		mobile: "",
+		email: "",
+		confirmation: "",
+	});
 
-const initialValues = {
-	civilité: "male",
-	langue: "Français",
-	prenom: "",
-	nom: "",
-	profession: "Chirurgien Dentiste",
-	specialité: "",
-	pays: "France",
-	ville: "",
-	cp: "",
-	numero: "",
-	boite: "",
-	adresse: "",
-	telephone: "",
-	email: "",
-	confirmation: "",
-};
-
-// interface FormValues {
-// 	civilité: string;
-// 	langue: string;
-// 	prenom: string;
-// 	nom: string;
-// 	profession: string;
-// 	specialité: string;
-// 	pays: string;
-// 	ville: string;
-// 	cp: int;
-// 	numero: int;
-// 	boite: int;
-// 	adresse: string;
-// 	telephone: string;
-// 	email: string;
-// 	confirmation: string;
-// }
-
-export default function Form() {
-	const [values, setValues] = useState(initialValues);
-	const handleInputChange = (e) => {
-		const { name, value } = e.target;
-		setValues({
-			...values,
-			[name]: value,
-		});
+	const handleInputChange = (event) => {
+		const { name, value } = event.target;
+		setValues({ ...values, [name]: value });
 	};
 	const [country, setCountry] = useState("France");
 	const [cities, setCities] = useState([]);
@@ -104,13 +81,6 @@ export default function Form() {
 			setCP("");
 		}
 	}, [inputValue]);
-
-	const validate = () => {
-		let temp = {};
-		temp.prenom = values.prenom ? "" : "this field is required";
-		temp.email = /$|.+@+..+/.test(values.email) ? "" : "email is not valid";
-		temp.numero = values.numero ? "" : "this field is required";
-	};
 
 	return (
 		<form>
@@ -452,4 +422,6 @@ export default function Form() {
 			</Grid>
 		</form>
 	);
-}
+};
+
+export default MyForm;

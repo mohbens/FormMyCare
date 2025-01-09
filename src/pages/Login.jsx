@@ -3,6 +3,7 @@ import React from "react";
 import Form from "../components/Form";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Identification from "../components/Identification";
+import Test from "../pages/Test.jsx";
 export default function Login() {
 	return (
 		<div
@@ -53,10 +54,10 @@ export default function Login() {
 								// borderColor: "rgba(0, 0, 0, 0.12);",
 							}}></hr>
 						<Identification />
+						{/* <Test /> */}
 					</Card>
 				</Grid>
 			</div>
-			;
 		</div>
 	);
 }

@@ -61,7 +61,6 @@ export default function Register() {
 					</Card>
 				</Grid>
 			</div>
-			;
 		</div>
 	);
 }
