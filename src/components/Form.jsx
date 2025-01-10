@@ -41,24 +41,6 @@ const initialValues = {
 	confirmation: "",
 };
 
-// interface FormValues {
-// 	civilité: string;
-// 	langue: string;
-// 	prenom: string;
-// 	nom: string;
-// 	profession: string;
-// 	specialité: string;
-// 	pays: string;
-// 	ville: string;
-// 	cp: int;
-// 	numero: int;
-// 	boite: int;
-// 	adresse: string;
-// 	telephone: string;
-// 	email: string;
-// 	confirmation: string;
-// }
-
 export default function Form() {
 	const [values, setValues] = useState(initialValues);
 	const handleInputChange = (e) => {
@@ -105,16 +87,55 @@ export default function Form() {
 		}
 	}, [inputValue]);
 
+	///////////////////Validation//////////////////////////////////////////
+	const [errors, setErrors] = useState({});
+
 	const validate = () => {
 		let temp = {};
-		temp.prenom = values.prenom ? "" : "this field is required";
-		temp.email = /$|.+@+..+/.test(values.email) ? "" : "email is not valid";
-		temp.numero = values.numero ? "" : "this field is required";
+		temp.civilité = values.civilité ? "" : "champ requis";
+		temp.langue = values.langue ? "" : "champ requis";
+		temp.prenom = values.prenom ? "" : "champ requis";
+		temp.nom = values.nom ? "" : "champ requis";
+		temp.pays = values.pays ? "" : "champ requis";
+		temp.ville = values.ville ? "" : "champ requis";
+		temp.numero = values.numero ? "" : "champ requis";
+		temp.adresse = values.adresse ? "" : "champ requis";
+		temp.mobile = values.mobile ? "" : "champ requis";
+
+		// Email validation
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		temp.email = emailRegex.test(values.email) ? "" : "email is not valid";
+
+		// Confirmation email validation
+		temp.confirmation =
+			values.confirmation === values.email
+				? ""
+				: "La confirmation doit correspondre à l'email";
+
+		setErrors(temp);
+
+		return Object.values(temp).every((x) => x === "");
 	};
 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if (validate()) {
+			console.log("Form submitted successfully!");
+			// Handle successful submission logic here
+		} else {
+			console.log("Validation errors:", errors);
+			// Handle error display logic here
+		}
+	};
+	/////////////////////////////////////////////////////////////////////////////////
 	return (
-		<form>
-			<Grid container spacing={2} justifyContent="center" alignItems="center">
+		<form onSubmit={handleSubmit}>
+			<Grid
+				container
+				spacing={2}
+				justifyContent="center"
+				alignItems="flex-start">
 				<Grid item xs={6}>
 					<RadioGroup
 						sx={{
@@ -162,6 +183,8 @@ export default function Form() {
 						value={values.prenom}
 						onChange={handleInputChange}
 						fullWidth
+						error={!!errors.prenom}
+						helperText={errors.prenom}
 					/>
 				</Grid>
 
@@ -177,6 +200,8 @@ export default function Form() {
 						value={values.nom}
 						onChange={handleInputChange}
 						fullWidth
+						error={!!errors.nom}
+						helperText={errors.nom}
 					/>
 				</Grid>
 
@@ -225,11 +250,7 @@ export default function Form() {
 						</Select>
 					</FormControl>
 				</Grid>
-				{/* <Grid
-					container
-					item
-					spacing={2}
-					sx={{ display: "flex", justifyContent: "space-between" }}> */}
+
 				<Grid item xs={12} sm={6}>
 					<FormControl fullWidth>
 						<InputLabel id="pays-label">Pays *</InputLabel>
@@ -269,6 +290,8 @@ export default function Form() {
 									InputLabelProps={{
 										style: { fontWeight: 600 },
 									}}
+									error={!!errors.ville}
+									helperText={errors.ville}
 								/>
 							)}
 							// onChange={(event, newValue) => {}}
@@ -319,6 +342,8 @@ export default function Form() {
 							value={values.numéro}
 							onChange={handleInputChange}
 							fullWidth
+							error={!!errors.numero}
+							helperText={errors.numero}
 						/>
 					</Grid>
 
@@ -349,6 +374,8 @@ export default function Form() {
 						value={values.adresse}
 						onChange={handleInputChange}
 						fullWidth
+						error={!!errors.adresse}
+						helperText={errors.adresse}
 					/>
 				</Grid>
 
@@ -390,6 +417,8 @@ export default function Form() {
 							),
 						}}
 						fullWidth
+						error={!!errors.mobile}
+						helperText={errors.mobile}
 					/>
 				</Grid>
 
@@ -409,6 +438,8 @@ export default function Form() {
 							),
 						}}
 						fullWidth
+						error={!!errors.email}
+						helperText={errors.email}
 					/>
 				</Grid>
 
@@ -428,12 +459,15 @@ export default function Form() {
 							),
 						}}
 						fullWidth
+						error={!!errors.nom}
+						helperText={errors.nom}
 					/>
 				</Grid>
 
-				{/* Bouton d'envoi */}
+				{/* Submit */}
 				<Grid item xs={12}>
 					<Button
+						type="submit"
 						sx={{
 							width: "100%",
 							mb: "24px",
@@ -444,7 +478,7 @@ export default function Form() {
 						variant="contained">
 						CRÉER VOTRE COMPTE
 					</Button>
-					{/* Lien vers la page de connexion */}
+
 					<Link to="/login" style={{ color: "red", textDecoration: "none" }}>
 						Déjà membre ? S'identifier
 					</Link>
