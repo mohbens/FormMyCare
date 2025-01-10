@@ -17,7 +17,10 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
+import "../utils/i18n";
+import { useTranslation } from "react-i18next";
 export default function Identification() {
+	const { t } = useTranslation();
 	const initialValues = {
 		Email: "",
 		Password: "",
@@ -51,8 +54,8 @@ export default function Identification() {
 	return (
 		<Box>
 			<TextField
-				label="Email *"
-				placeholder="Email"
+				label={t("email") + "*"}
+				placeholder={t("email")}
 				sx={{ width: "100%", mb: 2 }}
 				InputProps={{
 					startAdornment: (
@@ -66,10 +69,11 @@ export default function Identification() {
 			<Box>
 				<FormControl sx={{ width: "100%" }} variant="outlined">
 					<InputLabel htmlFor="outlined-adornment-password">
-						Mot de passe *
+						{t("psw") + "*"}
 					</InputLabel>
 
 					<OutlinedInput
+						label={t("psw") + "*"}
 						id="outlined-adornment-password"
 						type={showPassword ? "text" : "password"}
 						endAdornment={
@@ -89,7 +93,6 @@ export default function Identification() {
 								</IconButton>
 							</InputAdornment>
 						}
-						label="Password"
 					/>
 				</FormControl>
 			</Box>
@@ -103,14 +106,14 @@ export default function Identification() {
 						},
 					}}
 					control={<Checkbox />}
-					label="Rester connecté"
+					label={t("StayCo")}
 				/>
 			</Box>
 			<Button
 				sx={{ width: "100%", mt: 2, height: "42px" }}
 				color="primary"
 				variant="contained">
-				S'identifier
+				{t("btnLogin")}
 			</Button>
 			<Box
 				sx={{
@@ -126,7 +129,7 @@ export default function Identification() {
 						marginBottom: "0px",
 						textDecoration: "none",
 					}}>
-					Mot de passe oublié ?
+					{t("LoginLink1")}
 				</Link>
 				<Link
 					to={"/register"}
@@ -136,7 +139,7 @@ export default function Identification() {
 						marginBottom: "0px",
 						textDecoration: "none",
 					}}>
-					Pas encore membre?
+					{t("LoginLink2")}
 				</Link>
 			</Box>
 		</Box>

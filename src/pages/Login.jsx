@@ -4,7 +4,10 @@ import Form from "../components/Form";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Identification from "../components/Identification";
 import Test from "../pages/Test.jsx";
+import "../utils/i18n";
+import { useTranslation } from "react-i18next";
 export default function Login() {
+	const { t } = useTranslation();
 	return (
 		<div
 			style={{
@@ -40,9 +43,10 @@ export default function Login() {
 							<Typography
 								variant="h5"
 								sx={{ color: "black", fontWeight: "bold" }}>
-								Bienvenue sur <span style={{ color: "red" }}>MyCareFlex</span>
+								{t("titleB")}
+								<span style={{ color: "red" }}>{t("titleR")}</span>
 								<Typography variant="h6" style={{ fontSize: "0.875rem" }}>
-									Veuillez vous identifier
+									{t("titlePLogin")}
 								</Typography>
 							</Typography>
 						</div>

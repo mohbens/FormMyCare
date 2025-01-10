@@ -2,8 +2,11 @@ import { Card, Grid, Typography } from "@mui/material";
 import React from "react";
 import PasswordIcon from "@mui/icons-material/Password";
 import Reinitialiser from "../components/Reinitialiser";
+import { useTranslation } from "react-i18next";
+import i18n from "../utils/i18n";
 
 export default function Forgot() {
+	const { t } = useTranslation();
 	return (
 		<div
 			style={{
@@ -39,9 +42,10 @@ export default function Forgot() {
 							<Typography
 								variant="h5"
 								sx={{ color: "black", fontWeight: "bold" }}>
-								Bienvenue sur <span style={{ color: "red" }}>MyCareFlex</span>
+								{t("titleB")}
+								<span style={{ color: "red" }}>{t("titleR")}</span>
 								<Typography variant="h6" style={{ fontSize: "0.875rem" }}>
-									Demander un nouveau mot de passe
+									{t("titlePForgot")}
 								</Typography>
 							</Typography>
 						</div>

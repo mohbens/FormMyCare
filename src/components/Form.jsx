@@ -22,7 +22,8 @@ import franceData from "../data/france.json";
 import belgiumData from "../data/belgique.json";
 import { deepOrange, lime, purple } from "@mui/material/colors";
 import { Link } from "react-router-dom";
-
+import i18n from "../utils/i18n";
+import { useTranslation } from "react-i18next";
 const initialValues = {
 	civilité: "male",
 	langue: "Français",
@@ -129,6 +130,7 @@ export default function Form() {
 		}
 	};
 	/////////////////////////////////////////////////////////////////////////////////
+	const { t } = useTranslation();
 	return (
 		<form onSubmit={handleSubmit}>
 			<Grid
@@ -150,23 +152,31 @@ export default function Form() {
 						name="civilité"
 						value={values.civilité}
 						onChange={handleInputChange}>
-						<FormControlLabel value="male" control={<Radio />} label="M." />
-						<FormControlLabel value="female" control={<Radio />} label="Mme" />
+						<FormControlLabel
+							value="male"
+							control={<Radio />}
+							label={t("male")}
+						/>
+						<FormControlLabel
+							value="female"
+							control={<Radio />}
+							label={t("Mrs.")}
+						/>
 					</RadioGroup>
 				</Grid>
 
 				<Grid item xs={12} sm={6}>
 					<FormControl fullWidth>
-						<InputLabel id="langue-label">Langue *</InputLabel>
+						<InputLabel id="langue-label">{t("Language")} *</InputLabel>
 						<Select
 							labelId="langue-label"
 							id="langue-select"
 							value={values.langue}
-							label="Langue *"
+							label={t("language")}
 							onChange={handleInputChange}
-							name="langue">
-							<MenuItem value="Français">Français</MenuItem>
-							<MenuItem value="Anglais">Anglais</MenuItem>
+							name={t("language")}>
+							<MenuItem value={t("French")}>{t("French")}</MenuItem>
+							<MenuItem value={t("english")}>{t("english")}</MenuItem>
 						</Select>
 					</FormControl>
 				</Grid>
@@ -177,9 +187,9 @@ export default function Form() {
 							style: { fontWeight: 600 },
 						}}
 						variant="outlined"
-						label="Prénom *"
-						placeholder="Prénom"
-						name="prenom"
+						label={t("firstName") + " *"}
+						placeholder={t("firstName")}
+						name={t("firstName")}
 						value={values.prenom}
 						onChange={handleInputChange}
 						fullWidth
@@ -194,9 +204,9 @@ export default function Form() {
 							style: { fontWeight: 600 },
 						}}
 						variant="outlined"
-						label="Nom *"
-						placeholder="Nom"
-						name="nom"
+						label={t("lastName") + " *"}
+						placeholder={t("lastName")}
+						name={t("lastName")}
 						value={values.nom}
 						onChange={handleInputChange}
 						fullWidth
@@ -207,18 +217,18 @@ export default function Form() {
 
 				<Grid item xs={12} sm={6}>
 					<FormControl fullWidth>
-						<InputLabel id="profession-label">Profession *</InputLabel>
+						<InputLabel id="profession-label">
+							{t("profession") + " *"}
+						</InputLabel>
 						<Select
 							disabled
 							labelId="demo-simple-select-helper-label"
 							id="demo-simple-select-helper"
 							value={values.profession}
-							label="Profession *"
+							label={t("profession") + " *"}
 							sx={{ width: "100%" }}
 							onChange={handleInputChange}>
-							<MenuItem value="Chirurgien Dentiste">
-								Chirurgien Dentiste
-							</MenuItem>
+							<MenuItem value={t("CHD")}>{t("CHD")}</MenuItem>
 						</Select>
 					</FormControl>
 				</Grid>
@@ -229,37 +239,33 @@ export default function Form() {
 						InputLabelProps={{
 							style: { fontWeight: 600 },
 						}}>
-						<InputLabel id="specialite-label">Spécialité</InputLabel>
+						<InputLabel id="specialite-label">{t("speciality")}</InputLabel>
 						<Select
 							labelId="specialite-label"
 							id="specialite-select"
 							value={values.spécialité}
-							label="Spécialité"
+							label={t("speciality")}
 							onChange={handleInputChange}
-							name="spécialité">
-							<MenuItem value="Dentiste Généraliste">
-								Dentiste Généraliste
-							</MenuItem>
-							<MenuItem value="Endodontiste">Endodontiste</MenuItem>
-							<MenuItem value="Chirurgien Maxillo-Facial">
-								Chirurgien Maxillo-Facial
-							</MenuItem>
-							<MenuItem value="Orthodontiste">Orthodontiste</MenuItem>
-							<MenuItem value="Parodontiste">Parodontiste</MenuItem>
-							<MenuItem value="Pédodontiste">Pédodontiste</MenuItem>
+							name={t("speciality")}>
+							<MenuItem value={t("GD")}>{t("GD")}</MenuItem>
+							<MenuItem value={t("Endo")}>{t("Endo")}</MenuItem>
+							<MenuItem value={t("Maxilo")}>{t("Maxilo")}</MenuItem>
+							<MenuItem value={t("Ortho")}>{t("Ortho")}</MenuItem>
+							<MenuItem value={t("Perio")}>{t("Perio")}</MenuItem>
+							<MenuItem value={t("Pedod")}>{t("Pedod")}</MenuItem>
 						</Select>
 					</FormControl>
 				</Grid>
 
 				<Grid item xs={12} sm={6}>
 					<FormControl fullWidth>
-						<InputLabel id="pays-label">Pays *</InputLabel>
+						<InputLabel id="pays-label">{t("Country")} *</InputLabel>
 						<Select
 							id="pays-select"
 							value={values.pays}
-							label="Pays *"
+							label={t("Country") + "*"}
 							onChange={handleInputChange}
-							name="pays">
+							name={t("Country")}>
 							{countries.map((option) => (
 								<MenuItem key={option.value} value={option.value}>
 									{option.label}
@@ -285,7 +291,7 @@ export default function Form() {
 							renderInput={(params) => (
 								<TextField
 									{...params}
-									label="Ville *"
+									label={t("city") + "*"}
 									variant="outlined"
 									InputLabelProps={{
 										style: { fontWeight: 600 },
@@ -315,7 +321,7 @@ export default function Form() {
 							InputLabelProps={{
 								style: { fontWeight: 600 },
 							}}
-							label="CP"
+							label={t("CP")}
 							variant="outlined"
 							disabled
 							value={CP}
@@ -336,9 +342,9 @@ export default function Form() {
 								style: { fontWeight: 600 },
 							}}
 							variant="outlined"
-							label="Numéro *"
-							placeholder="Numéro"
-							name="numéro"
+							label={t("number") + "*"}
+							placeholder={t("number")}
+							name={t("number")}
 							value={values.numéro}
 							onChange={handleInputChange}
 							fullWidth
@@ -353,8 +359,8 @@ export default function Form() {
 								style: { fontWeight: 600 },
 							}}
 							variant="outlined"
-							label="Boîte"
-							placeholder="Box"
+							label={t("box")}
+							placeholder={t("box")}
 							name="boîte"
 							value={values.boîte}
 							onChange={handleInputChange}
@@ -368,8 +374,8 @@ export default function Form() {
 							style: { fontWeight: 600 },
 						}}
 						variant="outlined"
-						label="Adresse *"
-						placeholder="Adresse"
+						label={t("adress") + "*"}
+						placeholder={t("adress")}
 						name="adresse"
 						value={values.adresse}
 						onChange={handleInputChange}
@@ -385,8 +391,8 @@ export default function Form() {
 							style: { fontWeight: 600 },
 						}}
 						variant="outlined"
-						label="Téléphone *"
-						placeholder="Téléphone"
+						label={t("phone") + "*"}
+						placeholder={t("phone")}
 						name="téléphone"
 						value={values.téléphone}
 						onChange={handleInputChange}
@@ -404,8 +410,8 @@ export default function Form() {
 				<Grid item xs={12} sm={6}>
 					<TextField
 						variant="outlined"
-						label="Mobile *"
-						placeholder="Mobile"
+						label={t("mobile") + "*"}
+						placeholder={t("mobile")}
 						name="mobile"
 						value={values.mobile}
 						onChange={handleInputChange}
@@ -425,8 +431,8 @@ export default function Form() {
 				<Grid item xs={12} sm={6}>
 					<TextField
 						variant="outlined"
-						label="Email *"
-						placeholder="Email"
+						label={t("email") + "*"}
+						placeholder={t("email")}
 						name="email"
 						value={values.email}
 						onChange={handleInputChange}
@@ -446,8 +452,8 @@ export default function Form() {
 				<Grid item xs={12} sm={6}>
 					<TextField
 						variant="outlined"
-						label="Confirmation *"
-						placeholder="Confirmation"
+						label={t("confirmation") + "*"}
+						placeholder={t("confirmation")}
 						name="confirmation"
 						value={values.confirmation}
 						onChange={handleInputChange}
@@ -476,11 +482,11 @@ export default function Form() {
 						}}
 						color="primary"
 						variant="contained">
-						CRÉER VOTRE COMPTE
+						{t("BtnRegister")}
 					</Button>
 
 					<Link to="/login" style={{ color: "red", textDecoration: "none" }}>
-						Déjà membre ? S'identifier
+						{t("RegisterLink1")}
 					</Link>
 				</Grid>
 			</Grid>

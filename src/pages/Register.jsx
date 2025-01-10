@@ -4,8 +4,11 @@ import "../styles/register.css";
 
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import Form from "../components/Form";
+import "../utils/i18n";
+import { useTranslation } from "react-i18next";
 
 export default function Register() {
+	const { t } = useTranslation();
 	return (
 		<div
 			style={{
@@ -43,9 +46,10 @@ export default function Register() {
 							<Typography
 								variant="h5"
 								sx={{ color: "black", fontWeight: "bold" }}>
-								Bienvenue sur <span style={{ color: "red" }}>MyCareFlex</span>
+								{t("titleB")}
+								<span style={{ color: "red" }}>MyCareFlex</span>
 								<Typography variant="h6" style={{ fontSize: "0.875rem" }}>
-									Créer votre compte
+									{t("titlePRegister")}
 								</Typography>
 							</Typography>
 						</div>

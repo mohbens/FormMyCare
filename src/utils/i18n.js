@@ -1,0 +1,118 @@
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+
+const resources = {
+	en: {
+		translation: {
+			titleB: "Welcome to ",
+			titleR: "MyCareFlex",
+			titlePRegister: "Create your account",
+			gender: "Gender",
+			male: "Mr.",
+			female: "Mrs.",
+			language: "Language",
+			franch: "French",
+			english: "English",
+			firstName: "First Name ",
+			lastName: "Last Name",
+			profession: "Profession",
+			CHD: "Dentist Surgeon",
+			speciality: "speciality",
+			GD: "General Dentist",
+			Endo: "Endodontist",
+			Maxilo: "Maxillofacial Surgeon",
+			Ortho: "Orthodontist",
+			Perio: "Periodontist",
+			Pedod: "Pedodontist",
+			Country: "Country",
+			CountFr: "France",
+			CountBel: "Belgium",
+			city: "City",
+			CP: "PostCode",
+			number: "Number",
+			box: "Box",
+			adress: "Address",
+			phone: "Phone",
+			mobile: "Mobile",
+			email: "Email",
+			confirmation: "Confirmation",
+			BtnRegister: "CREAT YOUR ACCOUNT",
+			RegisterLink1: "Already a member ? Log in",
+			//////////////////////////////////////
+			titlePLogin: "Please log in",
+			psw: "Password",
+			StayCo: "Stay connected",
+			btnLogin: "Log IN",
+			LoginLink1: "Forgot password?",
+			LoginLink2: "Not a member yet ?",
+
+			////////////////Forgot///////////////////
+			titlePForgot: "Request a new password",
+			btnForgot: "RESET",
+			ForgotLink1: "Log In",
+			ForgotLink2: "Not a member yet ?",
+		},
+	},
+	fr: {
+		translation: {
+			////////////////Register///////////////////
+			titleB: "Bienvenue sur ",
+			titleR: "MyCareFlex",
+			titlePRegister: "Créer votre compte",
+			gender: "Civilité",
+			male: "M.",
+			female: "Mme.",
+			language: "Langue",
+			franch: "Frençais",
+			english: "Anglais",
+			firstName: "Prénom",
+			lastName: "Nom",
+			profession: "Profession",
+			CHD: "Chirurgien Dentiste",
+			speciality: "Spécialité",
+			GD: "Dentiste Généraliste",
+			Endo: "Endodontiste",
+			Maxilo: "Chirurgien Maxillo-Facial",
+			Ortho: "Orthodontiste",
+			Perio: "Periodontiste",
+			Pedod: "Pedodontiste",
+			Country: "Pays",
+			CountFr: "France",
+			CountBel: "Belgique",
+			city: "Ville",
+			CP: "CP",
+			number: "Numéro",
+			box: "Boîte",
+			adress: "Adresse",
+			phone: "Telephone",
+			mobile: "Mobile",
+			email: "Email",
+			confirmation: "Confirmation",
+			BtnRegister: "Créer Votre Compte",
+			RegisterLink1: "Dejé membre? Sidentifier",
+			////////////////Login///////////////////
+			titlePLogin: "Veuillez vous identifier",
+			psw: "Mot de passe",
+			StayCo: "Rester connecté",
+			btnLogin: "S'identifier",
+			LoginLink1: "Forgot password?",
+			LoginLink2: "Not a member yet ?",
+			////////////////Forgot///////////////////
+			titlePForgot: "Demander un nouveau mot de passe",
+			btnForgot: "Réinitialiser",
+			ForgotLink1: "S'identifier",
+			ForgotLink2: "Pas encore membre?",
+		},
+	},
+};
+
+i18n.use(initReactI18next).init({
+	resources,
+	lng: "en",
+
+	interpolation: {
+		escapeValue: false,
+	},
+});
+
+export default i18n;
