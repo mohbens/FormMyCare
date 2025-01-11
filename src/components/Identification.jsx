@@ -3,30 +3,34 @@ import {
 	Button,
 	Checkbox,
 	FormControlLabel,
+	FormHelperText,
 	IconButton,
 	InputAdornment,
 	InputLabel,
 	OutlinedInput,
 	TextField,
 } from "@mui/material";
-import React, { use, useEffect, useState } from "react";
+import React, { useState } from "react";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
-
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
-import "../utils/i18n";
 import { useTranslation } from "react-i18next";
+import "../utils/i18n";
+
 export default function Identification() {
 	const { t } = useTranslation();
 	const initialValues = {
-		Email: "",
-		Password: "",
+		email: "",
+		password: "",
 	};
 
 	const [values, setValues] = useState(initialValues);
+	const [showPassword, setShowPassword] = useState(false);
+	const [errors, setErrors] = useState({});
+
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setValues({
@@ -35,27 +39,43 @@ export default function Identification() {
 		});
 	};
 
-	const [showPassword, setShowPassword] = React.useState(false);
-
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-	const handleMouseDownPassword = (
-		event: React.MouseEvent<HTMLButtonElement>
-	) => {
+	const handleMouseDownPassword = (event) => {
 		event.preventDefault();
 	};
 
-	const handleMouseUpPassword = (
-		event: React.MouseEvent<HTMLButtonElement>
-	) => {
-		event.preventDefault();
+	const validate = () => {
+		let tempErrors = {};
+
+		tempErrors.password = values.password ? "" : t("Required");
+
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		tempErrors.email = emailRegex.test(values.email) ? "" : t("InvalidEmail");
+
+		setErrors(tempErrors);
+
+		return Object.values(tempErrors).every((x) => x === "");
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if (validate()) {
+			console.log("Form submitted successfully!");
+			setValues(initialValues);
+			setErrors({});
+		} else {
+			console.log("Validation errors:", errors);
+		}
 	};
 
 	return (
-		<Box>
+		<Box component="form" onSubmit={handleSubmit}>
 			<TextField
+				name="email"
 				label={t("email") + "*"}
-				placeholder={t("email")}
+				value={values.email}
+				onChange={handleInputChange}
 				sx={{ width: "100%", mb: 2 }}
 				InputProps={{
 					startAdornment: (
@@ -64,6 +84,8 @@ export default function Identification() {
 						</InputAdornment>
 					),
 				}}
+				error={!!errors.email}
+				helperText={errors.email}
 			/>
 
 			<Box>
@@ -71,31 +93,33 @@ export default function Identification() {
 					<InputLabel htmlFor="outlined-adornment-password">
 						{t("psw") + "*"}
 					</InputLabel>
-
 					<OutlinedInput
+						name="password"
+						value={values.password}
+						onChange={handleInputChange}
+						error={!!errors.password}
+						helperText={errors.password}
 						label={t("psw") + "*"}
 						id="outlined-adornment-password"
 						type={showPassword ? "text" : "password"}
 						endAdornment={
-							<InputAdornment
-								position="end"
-								sx={{ display: "flex", justifyContent: "space-between" }}>
+							<InputAdornment position="end">
 								<VpnKeyIcon />
 								<IconButton
-									aria-label={
-										showPassword ? "hide the password" : "display the password"
-									}
 									onClick={handleClickShowPassword}
 									onMouseDown={handleMouseDownPassword}
-									onMouseUp={handleMouseUpPassword}
 									edge="end">
 									{showPassword ? <VisibilityOff /> : <Visibility />}
 								</IconButton>
 							</InputAdornment>
 						}
 					/>
+					<FormHelperText id="password-helper-text" error>
+						{errors.password}
+					</FormHelperText>
 				</FormControl>
 			</Box>
+
 			<Box>
 				<FormControlLabel
 					sx={{
@@ -109,12 +133,15 @@ export default function Identification() {
 					label={t("StayCo")}
 				/>
 			</Box>
+
 			<Button
+				type="submit"
 				sx={{ width: "100%", mt: 2, height: "42px" }}
 				color="primary"
 				variant="contained">
 				{t("btnLogin")}
 			</Button>
+
 			<Box
 				sx={{
 					display: "flex",
@@ -123,22 +150,10 @@ export default function Identification() {
 				}}>
 				<Link
 					to={"/forgot-password"}
-					style={{
-						marginTop: "20px",
-						color: "red",
-						marginBottom: "0px",
-						textDecoration: "none",
-					}}>
+					style={{ color: "red", textDecoration: "none" }}>
 					{t("LoginLink1")}
 				</Link>
-				<Link
-					to={"/register"}
-					style={{
-						marginTop: "24px",
-						color: "red",
-						marginBottom: "0px",
-						textDecoration: "none",
-					}}>
+				<Link to={"/register"} style={{ color: "red", textDecoration: "none" }}>
 					{t("LoginLink2")}
 				</Link>
 			</Box>

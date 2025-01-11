@@ -13,6 +13,7 @@ import {
 	Radio,
 	RadioGroup,
 	Select,
+	styled,
 	TextField,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -49,8 +50,8 @@ export default function Form() {
 	const { t } = useTranslation();
 
 	const countries = [
-		{ value: "france", label: "France", data: CPFr },
-		{ value: "belgique", label: "Belgique", data: CPBl },
+		{ value: "france", label: t("CountFr"), data: CPFr },
+		{ value: "belgique", label: t("CountBel"), data: CPBl },
 	];
 
 	const handleInputChange = (e) => {
@@ -96,10 +97,12 @@ export default function Form() {
 		temp.nom = values.nom ? "" : t("Required");
 		temp.pays = values.pays ? "" : t("Required");
 		temp.ville = values.ville ? "" : t("Required");
-		temp.numero = values.numero ? "" : t("Required");
+		temp.numero = NumRegex.test(values.numero) ? "" : t("Required");
 		temp.adresse = values.adresse ? "" : t("Required");
 		temp.mobile = values.mobile ? "" : t("Required");
 
+		//Numero regex
+		const NumRegex = /^[0-9]{10,}$/;
 		// Email regex
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		temp.email = emailRegex.test(values.email) ? "" : t("InvalidEmail");
@@ -122,8 +125,29 @@ export default function Form() {
 			console.log("Validation errors:", errors);
 		}
 	};
-	/////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////
 
+	//////////////////Scrollbar color///////////////////
+	const CustomAutocomplete = styled("ul")(({ theme }) => ({
+		maxHeight: "200px",
+		overflowY: "auto",
+		padding: 0,
+		margin: 0,
+
+		"&::-webkit-scrollbar": {
+			width: "8px",
+		},
+		"&::-webkit-scrollbar-thumb": {
+			backgroundColor: " rgb(229, 57, 53)",
+		},
+		"&::-webkit-scrollbar-thumb:hover": {
+			backgroundColor: "#555",
+		},
+		"&::-webkit-scrollbar-track": {
+			background: "#f1f1f1",
+		},
+	}));
+	/////////////////////////////////////////////////////////////////////////////
 	return (
 		<form onSubmit={handleSubmit}>
 			<Grid
@@ -296,6 +320,7 @@ export default function Form() {
 							)}
 							// onChange={(event, newValue) => {}}
 							// sx={{ width: "70%" }}
+							ListboxComponent={CustomAutocomplete}
 							componentsProps={{
 								paper: {
 									sx: {
@@ -303,7 +328,6 @@ export default function Form() {
 										width: "265px",
 										maxHeight: "500px",
 										border: "2px solid rgba(0, 0, 255 )",
-										scrollbarwidth: "thin",
 									},
 								},
 							}}
@@ -340,7 +364,6 @@ export default function Form() {
 							placeholder={t("number")}
 							name={t("number")}
 							value={values.numéro}
-							onChange={handleInputChange}
 							fullWidth
 							error={!!errors.numero}
 							helperText={errors.numero}
@@ -389,7 +412,13 @@ export default function Form() {
 						placeholder={t("phone")}
 						name="téléphone"
 						value={values.téléphone}
-						onChange={handleInputChange}
+						// value={`+33${values.téléphone}`}
+						onChange={(e) => {
+							const value = e.target.value;
+							if (/^\d{0,13}$/.test(value)) {
+								handleInputChange(e);
+							}
+						}}
 						InputProps={{
 							startAdornment: (
 								<InputAdornment position="start">
@@ -408,7 +437,14 @@ export default function Form() {
 						placeholder={t("mobile")}
 						name="mobile"
 						value={values.mobile}
-						onChange={handleInputChange}
+						// value={`+33${values.mobile}`}
+						onChange={(e) => {
+							const value = e.target.value;
+							if (/^\d{0,13}$/.test(value)) {
+								handleInputChange(e);
+							}
+						}}
+						inputProps={{ maxLength: 13 }}
 						InputProps={{
 							startAdornment: (
 								<InputAdornment position="start">

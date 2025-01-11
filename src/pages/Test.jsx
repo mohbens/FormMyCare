@@ -12,7 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 import CPFr from "../data/france.json";
 import CPBl from "../data/belgique.json";
-
+import { styled } from "@mui/material/styles";
 const MyForm = () => {
 	const initialValues = {
 		pays: "France",
@@ -35,19 +35,18 @@ const MyForm = () => {
 		setValues((prevValues) => ({
 			...prevValues,
 			[name]: value,
-			ville: "", // Reset city when country changes
-			cp: "", // Reset postal code when country changes
+			ville: "",
+			cp: "",
 		}));
 
-		// Load cities based on selected country
 		const selectedCountry = countries.find(
 			(country) => country.value === value
 		);
 		if (selectedCountry) {
-			setCities(selectedCountry.data); // Set cities based on selected country
-			setInputValue(""); // Reset input value for Autocomplete
+			setCities(selectedCountry.data);
+			setInputValue("");
 		} else {
-			setCities([]); // Clear cities if no country is found
+			setCities([]);
 		}
 	};
 
@@ -60,6 +59,25 @@ const MyForm = () => {
 			});
 		}
 	};
+	const CustomAutocompleteListbox = styled("ul")(({ theme }) => ({
+		maxHeight: "200px",
+		overflowY: "auto",
+		padding: 0,
+		margin: 0,
+
+		"&::-webkit-scrollbar": {
+			width: "8px",
+		},
+		"&::-webkit-scrollbar-thumb": {
+			backgroundColor: " rgb(229, 57, 53)",
+		},
+		"&::-webkit-scrollbar-thumb:hover": {
+			backgroundColor: "#555",
+		},
+		"&::-webkit-scrollbar-track": {
+			background: "#f1f1f1",
+		},
+	}));
 
 	return (
 		<form>
@@ -106,6 +124,7 @@ const MyForm = () => {
 								}}
 							/>
 						)}
+						ListboxComponent={CustomAutocompleteListbox}
 					/>
 				</Grid>
 
