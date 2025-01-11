@@ -11,7 +11,7 @@ const resources = {
 			male: "Mr.",
 			female: "Mrs.",
 			language: "Language",
-			franch: "French",
+			french: "French",
 			english: "English",
 			firstName: "First Name ",
 			lastName: "Last Name",
@@ -51,6 +51,10 @@ const resources = {
 			btnForgot: "RESET",
 			ForgotLink1: "Log In",
 			ForgotLink2: "Not a member yet ?",
+			////////////////errors//////////////////
+			Required: "Required field",
+			InvalidEmail: "Invalid email",
+			EmailConf: "Confirmation must match the email",
 		},
 	},
 	fr: {
@@ -63,7 +67,7 @@ const resources = {
 			male: "M.",
 			female: "Mme.",
 			language: "Langue",
-			franch: "Frençais",
+			french: "Frençais",
 			english: "Anglais",
 			firstName: "Prénom",
 			lastName: "Nom",
@@ -102,13 +106,17 @@ const resources = {
 			btnForgot: "Réinitialiser",
 			ForgotLink1: "S'identifier",
 			ForgotLink2: "Pas encore membre?",
+			////////////////errors//////////////////
+			Required: "champ requis",
+			InvalidEmail: "email invalide",
+			EmailConf: "La confirmation doit correspondre à l'email",
 		},
 	},
 };
 
 i18n.use(initReactI18next).init({
 	resources,
-	lng: "en",
+	lng: "fr",
 
 	interpolation: {
 		escapeValue: false,

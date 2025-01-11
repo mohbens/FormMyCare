@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-	RadioGroup,
-	FormControlLabel,
-	Radio,
 	FormControl,
 	InputLabel,
 	Select,
@@ -11,191 +8,117 @@ import {
 	Button,
 	Grid,
 	Autocomplete,
-	InputAdornment,
 } from "@mui/material";
-import PhoneIcon from "@mui/icons-material/Phone";
-import SmartphoneIcon from "@mui/icons-material/Smartphone";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import franceData from "../data/france.json";
-import belgiumData from "../data/belgique.json";
-import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import CPFr from "../data/france.json";
+import CPBl from "../data/belgique.json";
 
 const MyForm = () => {
-	const [values, setValues] = useState({
-		civilité: "",
-		langue: "",
-		prenom: "",
-		nom: "",
-		profession: "Chirurgien Dentiste",
-		spécialité: "",
+	const initialValues = {
 		pays: "France",
 		ville: "",
-		CP: "",
-		numéro: "",
-		boîte: "",
-		adresse: "",
-		téléphone: "",
-		mobile: "",
-		email: "",
-		confirmation: "",
-	});
-
-	const [errors, setErrors] = useState({});
-
-	const handleInputChange = (event) => {
-		const { name, value } = event.target;
-		setValues({ ...values, [name]: value });
+		cp: "",
 	};
 
-	const validate = () => {
-		let temp = {};
-		temp.civilité = values.civilité ? "" : "champ requis";
-		temp.langue = values.langue ? "" : "champ requis";
-		temp.prenom = values.prenom ? "" : "champ requis";
-		temp.nom = values.nom ? "" : "champ requis";
-		temp.pays = values.pays ? "" : "champ requis";
-		temp.ville = values.ville ? "" : "champ requis";
-		temp.numéro = values.numéro ? "" : "champ requis";
-		temp.adresse = values.adresse ? "" : "champ requis";
-		temp.mobile = values.mobile ? "" : "champ requis";
+	const [values, setValues] = useState(initialValues);
+	const [cities, setCities] = useState([]);
+	const [inputValue, setInputValue] = useState("");
+	const { t } = useTranslation();
 
-		// Email validation
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		temp.email = emailRegex.test(values.email) ? "" : "email is not valid";
+	const countries = [
+		{ value: "france", label: "France", data: CPFr },
+		{ value: "belgique", label: "Belgique", data: CPBl },
+	];
 
-		// Confirmation email validation
-		temp.confirmation =
-			values.confirmation === values.email
-				? ""
-				: "confirmation must match email";
+	const handleInputChange = (e) => {
+		const { name, value } = e.target;
+		setValues((prevValues) => ({
+			...prevValues,
+			[name]: value,
+			ville: "", // Reset city when country changes
+			cp: "", // Reset postal code when country changes
+		}));
 
-		setErrors(temp);
-
-		return Object.values(temp).every((x) => x === "");
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
-		if (validate()) {
-			console.log("Form submitted successfully!");
-			// Handle successful submission logic here
+		// Load cities based on selected country
+		const selectedCountry = countries.find(
+			(country) => country.value === value
+		);
+		if (selectedCountry) {
+			setCities(selectedCountry.data); // Set cities based on selected country
+			setInputValue(""); // Reset input value for Autocomplete
 		} else {
-			console.log("Validation errors:", errors);
-			// Handle error display logic here
+			setCities([]); // Clear cities if no country is found
+		}
+	};
+
+	const handleCityChange = (event, newValue) => {
+		if (newValue) {
+			setValues({
+				...values,
+				ville: newValue.name,
+				cp: newValue.code,
+			});
 		}
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<Grid container spacing={2} justifyContent="center" alignItems="center">
-				<Grid item xs={6}>
-					<RadioGroup
-						row
-						name="civilité"
-						value={values.civilité}
-						onChange={handleInputChange}>
-						<FormControlLabel value="male" control={<Radio />} label="M." />
-						<FormControlLabel value="female" control={<Radio />} label="Mme" />
-					</RadioGroup>
-					{errors.civilité && (
-						<span style={{ color: "red" }}>{errors.civilité}</span>
-					)}
-				</Grid>
-
-				<Grid item xs={12} sm={6}>
-					<FormControl fullWidth>
-						<InputLabel id="langue-label">Langue *</InputLabel>
-						<Select
-							labelId="langue-label"
-							id="langue-select"
-							value={values.langue}
-							onChange={handleInputChange}
-							name="langue">
-							<MenuItem value="Français">Français</MenuItem>
-							<MenuItem value="Anglais">Anglais</MenuItem>
-						</Select>
-					</FormControl>
-					{errors.langue && (
-						<span style={{ color: "red" }}>{errors.langue}</span>
-					)}
-				</Grid>
-
-				<Grid item xs={12} sm={6}>
-					<TextField
-						variant="outlined"
-						label="Prénom *"
-						placeholder="Prénom"
-						name="prenom"
-						value={values.prenom}
+		<form>
+			<Grid item xs={12} sm={6}>
+				<FormControl fullWidth>
+					<InputLabel id="pays-label">{t("Country")} *</InputLabel>
+					<Select
+						id="pays-select"
+						value={values.pays}
+						label={t("Country") + "*"}
 						onChange={handleInputChange}
-						fullWidth
-						error={!!errors.prenom}
-						helperText={errors.prenom}
-					/>
-				</Grid>
+						name="pays">
+						{countries.map((option) => (
+							<MenuItem key={option.value} value={option.value}>
+								{option.label}
+							</MenuItem>
+						))}
+					</Select>
+				</FormControl>
+			</Grid>
 
-				<Grid item xs={12} sm={6}>
-					<TextField
-						variant="outlined"
-						label="Nom *"
-						placeholder="Nom"
-						name="nom"
-						value={values.nom}
-						onChange={handleInputChange}
-						fullWidth
-						error={!!errors.nom}
-						helperText={errors.nom}
-					/>
-				</Grid>
-
-				{/* Other fields remain unchanged */}
-
-				<Grid item xs={12} sm={6}>
-					<TextField
-						variant="outlined"
-						label="Email *"
-						placeholder="Email"
-						name="email"
-						value={values.email}
-						onChange={handleInputChange}
-						fullWidth
-						error={!!errors.email}
-						helperText={errors.email}
-					/>
-				</Grid>
-
-				<Grid item xs={12} sm={6}>
-					<TextField
-						variant="outlined"
-						label="Confirmation *"
-						placeholder="Confirmation"
-						name="confirmation"
-						value={values.confirmation}
-						onChange={handleInputChange}
-						fullWidth
-						error={!!errors.confirmation}
-						helperText={errors.confirmation}
-					/>
-				</Grid>
-
-				{/* Submit button */}
-				<Grid item xs={12}>
-					<Button
-						type="submit"
-						sx={{
-							width: "100%",
-							mb: "24px",
-							height: "42px",
-							fontSize: "0.9375rem",
+			<Grid
+				container
+				item
+				xs={12}
+				sm={6}
+				sx={{ justifyContent: "space-between" }}>
+				<Grid item xs={8.15} sm={8.15}>
+					<Autocomplete
+						options={cities}
+						getOptionLabel={(option) => option.name}
+						inputValue={inputValue}
+						onInputChange={(event, newInputValue) => {
+							setInputValue(newInputValue);
 						}}
-						color="primary"
-						variant="contained">
-						CRÉER VOTRE COMPTE
-					</Button>
-					<Link to="/login" style={{ color: "red", textDecoration: "none" }}>
-						Déjà membre ? S'identifier
-					</Link>
+						onChange={handleCityChange}
+						renderInput={(params) => (
+							<TextField
+								{...params}
+								label={t("city") + "*"}
+								variant="outlined"
+								InputLabelProps={{
+									style: { fontWeight: 600 },
+								}}
+							/>
+						)}
+					/>
+				</Grid>
+
+				<Grid item xs={3.5} sm={3.5}>
+					<TextField
+						InputLabelProps={{
+							style: { fontWeight: 600 },
+						}}
+						label={t("CP")}
+						variant="outlined"
+						disabled
+						value={values.cp}
+					/>
 				</Grid>
 			</Grid>
 		</form>

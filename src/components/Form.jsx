@@ -7,7 +7,6 @@ import {
 	Button,
 	FormControl,
 	FormControlLabel,
-	FormLabel,
 	InputAdornment,
 	InputLabel,
 	MenuItem,
@@ -17,21 +16,21 @@ import {
 	TextField,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import React, { use, useEffect, useState } from "react";
-import franceData from "../data/france.json";
-import belgiumData from "../data/belgique.json";
-import { deepOrange, lime, purple } from "@mui/material/colors";
+import React, { useState } from "react";
+
 import { Link } from "react-router-dom";
-import i18n from "../utils/i18n";
 import { useTranslation } from "react-i18next";
+import CPFr from "../data/france.json";
+import CPBl from "../data/belgique.json";
+
 const initialValues = {
 	civilité: "male",
-	langue: "Français",
+	langue: "Frençais",
 	prenom: "",
 	nom: "",
 	profession: "Chirurgien Dentiste",
 	specialité: "",
-	pays: "France",
+	pays: "france",
 	ville: "",
 	cp: "",
 	numero: "",
@@ -41,77 +40,73 @@ const initialValues = {
 	email: "",
 	confirmation: "",
 };
-
 export default function Form() {
 	const [values, setValues] = useState(initialValues);
-	const handleInputChange = (e) => {
-		const { name, value } = e.target;
-		setValues({
-			...values,
-			[name]: value,
-		});
-	};
-	const [country, setCountry] = useState("France");
+	// const [country, setCountry] = useState("France");
 	const [cities, setCities] = useState([]);
 	const [inputValue, setInputValue] = useState("");
-	const [CP, setCP] = useState("");
+	// const [CP, setCP] = useState("");
+	const { t } = useTranslation();
 
 	const countries = [
-		{ value: "france", label: "France" },
-		{ value: "belgique", label: "Belgique" },
+		{ value: "france", label: "France", data: CPFr },
+		{ value: "belgique", label: "Belgique", data: CPBl },
 	];
 
-	useEffect(() => {
-		if (country) {
-			const data = country === "france" ? franceData : belgiumData;
-			setCities(
-				// data.map((city) => city.Nom_commune + " (" + city.Code_postal + ")")
-				data.map((city) => city.Nom_commune)
-			);
+	const handleInputChange = (e) => {
+		const { name, value } = e.target;
+		setValues((prevValues) => ({
+			...prevValues,
+			[name]: value,
+			ville: "",
+			cp: "",
+		}));
+
+		/////////////////////////////charger les villes
+		const selectedCountry = countries.find(
+			(country) => country.value === value
+		);
+
+		if (selectedCountry) {
+			setCities(selectedCountry.data);
+			setInputValue("");
 		} else {
 			setCities([]);
 		}
-	}, [country]);
+	}; ////////////////////////////////////////////////////
 
-	useEffect(() => {
-		console.log("cities", cities);
-		console.log("inputValue123", inputValue);
-		const selectedCityData = cities.find(
-			(item) => item.Nom_commune === inputValue
-		);
-		console.log("selected", selectedCityData);
-		if (selectedCityData) {
-			setCP(selectedCityData.Code_postal);
-			// console.log("", );
-		} else {
-			setCP("");
+	const handleCityChange = (event, newValue) => {
+		if (newValue) {
+			setValues({
+				...values,
+				ville: newValue.name,
+				cp: newValue.code,
+			});
 		}
-	}, [inputValue]);
+	};
 
 	///////////////////Validation//////////////////////////////////////////
 	const [errors, setErrors] = useState({});
 
 	const validate = () => {
 		let temp = {};
-		temp.civilité = values.civilité ? "" : "champ requis";
-		temp.langue = values.langue ? "" : "champ requis";
-		temp.prenom = values.prenom ? "" : "champ requis";
-		temp.nom = values.nom ? "" : "champ requis";
-		temp.pays = values.pays ? "" : "champ requis";
-		temp.ville = values.ville ? "" : "champ requis";
-		temp.numero = values.numero ? "" : "champ requis";
-		temp.adresse = values.adresse ? "" : "champ requis";
-		temp.mobile = values.mobile ? "" : "champ requis";
+		temp.civilité = values.civilité ? "" : t("Required");
+		temp.langue = values.langue ? "" : t("Required");
+		temp.prenom = values.prenom ? "" : t("Required");
+		temp.nom = values.nom ? "" : t("Required");
+		temp.pays = values.pays ? "" : t("Required");
+		temp.ville = values.ville ? "" : t("Required");
+		temp.numero = values.numero ? "" : t("Required");
+		temp.adresse = values.adresse ? "" : t("Required");
+		temp.mobile = values.mobile ? "" : t("Required");
 
-		// Email validation
+		// Email regex
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		temp.email = emailRegex.test(values.email) ? "" : "email is not valid";
+		temp.email = emailRegex.test(values.email) ? "" : t("InvalidEmail");
 
-		// Confirmation email validation
+		// Confirmation email
 		temp.confirmation =
-			values.confirmation === values.email
-				? ""
-				: "La confirmation doit correspondre à l'email";
+			values.confirmation === values.email ? "" : t("EmailConf");
 
 		setErrors(temp);
 
@@ -123,14 +118,12 @@ export default function Form() {
 
 		if (validate()) {
 			console.log("Form submitted successfully!");
-			// Handle successful submission logic here
 		} else {
 			console.log("Validation errors:", errors);
-			// Handle error display logic here
 		}
 	};
 	/////////////////////////////////////////////////////////////////////////////////
-	const { t } = useTranslation();
+
 	return (
 		<form onSubmit={handleSubmit}>
 			<Grid
@@ -167,7 +160,7 @@ export default function Form() {
 
 				<Grid item xs={12} sm={6}>
 					<FormControl fullWidth>
-						<InputLabel id="langue-label">{t("Language")} *</InputLabel>
+						<InputLabel id="langue-label">{t("language")} *</InputLabel>
 						<Select
 							labelId="langue-label"
 							id="langue-select"
@@ -175,7 +168,7 @@ export default function Form() {
 							label={t("language")}
 							onChange={handleInputChange}
 							name={t("language")}>
-							<MenuItem value={t("French")}>{t("French")}</MenuItem>
+							<MenuItem value={t("french")}>{t("french")}</MenuItem>
 							<MenuItem value={t("english")}>{t("english")}</MenuItem>
 						</Select>
 					</FormControl>
@@ -265,7 +258,7 @@ export default function Form() {
 							value={values.pays}
 							label={t("Country") + "*"}
 							onChange={handleInputChange}
-							name={t("Country")}>
+							name="pays">
 							{countries.map((option) => (
 								<MenuItem key={option.value} value={option.value}>
 									{option.label}
@@ -283,11 +276,12 @@ export default function Form() {
 					<Grid item xs={8.15} sm={8.15}>
 						<Autocomplete
 							options={cities}
+							getOptionLabel={(option) => option.name}
 							inputValue={inputValue}
 							onInputChange={(event, newInputValue) => {
 								setInputValue(newInputValue);
-								console.log("newInput", newInputValue);
 							}}
+							onChange={handleCityChange}
 							renderInput={(params) => (
 								<TextField
 									{...params}
@@ -324,7 +318,7 @@ export default function Form() {
 							label={t("CP")}
 							variant="outlined"
 							disabled
-							value={CP}
+							value={values.cp}
 							// sx={{ width: "27%" }}
 						/>
 					</Grid>
@@ -465,8 +459,8 @@ export default function Form() {
 							),
 						}}
 						fullWidth
-						error={!!errors.nom}
-						helperText={errors.nom}
+						error={!!errors.confirmation}
+						helperText={errors.confirmation}
 					/>
 				</Grid>
 

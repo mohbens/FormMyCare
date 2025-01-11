@@ -1,9 +1,10 @@
-import { Card, Grid, Typography } from "@mui/material";
+import { Box, Card, Grid, Typography } from "@mui/material";
 import React from "react";
 import PasswordIcon from "@mui/icons-material/Password";
 import Reinitialiser from "../components/Reinitialiser";
 import { useTranslation } from "react-i18next";
 import i18n from "../utils/i18n";
+import Language from "../components/Language.jsx";
 
 export default function Forgot() {
 	const { t } = useTranslation();
@@ -32,23 +33,28 @@ export default function Forgot() {
 							margin: "0 auto ",
 							width: "520px",
 						}}>
-						<div
-							style={{
-								display: "flex",
+						<Box sx={{ display: "flex", justifyContent: "space-between" }}>
+							<div
+								style={{
+									display: "flex",
 
-								alignItems: "center",
-							}}>
-							<PasswordIcon sx={{ width: "50px", height: "50px", mr: "8px" }} />
-							<Typography
-								variant="h5"
-								sx={{ color: "black", fontWeight: "bold" }}>
-								{t("titleB")}
-								<span style={{ color: "red" }}>{t("titleR")}</span>
-								<Typography variant="h6" style={{ fontSize: "0.875rem" }}>
-									{t("titlePForgot")}
+									alignItems: "center",
+								}}>
+								<PasswordIcon
+									sx={{ width: "50px", height: "50px", mr: "8px" }}
+								/>
+								<Typography
+									variant="h5"
+									sx={{ color: "black", fontWeight: "bold" }}>
+									{t("titleB")}
+									<span style={{ color: "red" }}>{t("titleR")}</span>
+									<Typography variant="h6" style={{ fontSize: "0.875rem" }}>
+										{t("titlePForgot")}
+									</Typography>
 								</Typography>
-							</Typography>
-						</div>
+							</div>
+							<Language />
+						</Box>
 						<hr
 							style={{
 								width: "100%",
