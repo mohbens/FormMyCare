@@ -87,7 +87,9 @@ export default function Form() {
 	};
 
 	///////////////////Validation//////////////////////////////////////////
+	//Numero regex
 	const [errors, setErrors] = useState({});
+	const NumRegex = /^[0-9]{10,}$/;
 
 	const validate = () => {
 		let temp = {};
@@ -101,8 +103,6 @@ export default function Form() {
 		temp.adresse = values.adresse ? "" : t("Required");
 		temp.mobile = values.mobile ? "" : t("Required");
 
-		//Numero regex
-		const NumRegex = /^[0-9]{10,}$/;
 		// Email regex
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		temp.email = emailRegex.test(values.email) ? "" : t("InvalidEmail");
@@ -151,11 +151,15 @@ export default function Form() {
 	return (
 		<form onSubmit={handleSubmit}>
 			<Grid
+				display={"grid"}
+				gridTemplateColumns={"1fr 1fr"}
+				gap={2}
 				container
-				spacing={2}
-				justifyContent="center"
-				alignItems="flex-start">
-				<Grid item xs={6}>
+				// spacing={2}
+				// justifyContent="center"
+				// alignItems="flex-start"
+			>
+				<Grid item>
 					<RadioGroup
 						sx={{
 							border: "1px solid rgba(0, 0, 0, 0.23)",
@@ -182,9 +186,9 @@ export default function Form() {
 					</RadioGroup>
 				</Grid>
 
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<FormControl fullWidth>
-						<InputLabel id="langue-label">{t("language")} *</InputLabel>
+						<InputLabel id="langue-label">{t("language")}* </InputLabel>
 						<Select
 							labelId="langue-label"
 							id="langue-select"
@@ -198,7 +202,7 @@ export default function Form() {
 					</FormControl>
 				</Grid>
 
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<TextField
 						InputLabelProps={{
 							style: { fontWeight: 600 },
@@ -206,7 +210,8 @@ export default function Form() {
 						variant="outlined"
 						label={t("firstName") + " *"}
 						placeholder={t("firstName")}
-						name={t("firstName")}
+						// name={t("firstName")}
+						name="prenom"
 						value={values.prenom}
 						onChange={handleInputChange}
 						fullWidth
@@ -215,7 +220,7 @@ export default function Form() {
 					/>
 				</Grid>
 
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<TextField
 						InputLabelProps={{
 							style: { fontWeight: 600 },
@@ -223,7 +228,7 @@ export default function Form() {
 						variant="outlined"
 						label={t("lastName") + " *"}
 						placeholder={t("lastName")}
-						name={t("lastName")}
+						name="nom"
 						value={values.nom}
 						onChange={handleInputChange}
 						fullWidth
@@ -232,7 +237,7 @@ export default function Form() {
 					/>
 				</Grid>
 
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<FormControl fullWidth>
 						<InputLabel id="profession-label">
 							{t("profession") + " *"}
@@ -250,7 +255,7 @@ export default function Form() {
 					</FormControl>
 				</Grid>
 
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<FormControl
 						fullWidth
 						InputLabelProps={{
@@ -263,7 +268,7 @@ export default function Form() {
 							value={values.spécialité}
 							label={t("speciality")}
 							onChange={handleInputChange}
-							name={t("speciality")}>
+							name="speciality">
 							<MenuItem value={t("GD")}>{t("GD")}</MenuItem>
 							<MenuItem value={t("Endo")}>{t("Endo")}</MenuItem>
 							<MenuItem value={t("Maxilo")}>{t("Maxilo")}</MenuItem>
@@ -274,7 +279,7 @@ export default function Form() {
 					</FormControl>
 				</Grid>
 
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<FormControl fullWidth>
 						<InputLabel id="pays-label">{t("Country")} *</InputLabel>
 						<Select
@@ -291,12 +296,7 @@ export default function Form() {
 						</Select>
 					</FormControl>
 				</Grid>
-				<Grid
-					container
-					item
-					xs={12}
-					sm={6}
-					sx={{ justifyContent: "space-between" }}>
+				<Grid container item sx={{ justifyContent: "space-between" }}>
 					<Grid item xs={8.15} sm={8.15}>
 						<Autocomplete
 							options={cities}
@@ -348,12 +348,7 @@ export default function Form() {
 					</Grid>
 				</Grid>
 				{/* </Grid> */}
-				<Grid
-					container
-					item
-					xs={12}
-					sm={6}
-					sx={{ justifyContent: "space-between" }}>
+				<Grid container item sx={{ justifyContent: "space-between" }}>
 					<Grid item xs={5.9} sm={5.8}>
 						<TextField
 							InputLabelProps={{
@@ -362,7 +357,7 @@ export default function Form() {
 							variant="outlined"
 							label={t("number") + "*"}
 							placeholder={t("number")}
-							name={t("number")}
+							name="number"
 							value={values.numéro}
 							fullWidth
 							error={!!errors.numero}
@@ -385,7 +380,7 @@ export default function Form() {
 						/>
 					</Grid>
 				</Grid>
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<TextField
 						InputLabelProps={{
 							style: { fontWeight: 600 },
@@ -402,7 +397,7 @@ export default function Form() {
 					/>
 				</Grid>
 
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<TextField
 						InputLabelProps={{
 							style: { fontWeight: 600 },
@@ -430,7 +425,7 @@ export default function Form() {
 					/>
 				</Grid>
 
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<TextField
 						variant="outlined"
 						label={t("mobile") + "*"}
@@ -458,7 +453,7 @@ export default function Form() {
 					/>
 				</Grid>
 
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<TextField
 						variant="outlined"
 						label={t("email") + "*"}
@@ -479,7 +474,7 @@ export default function Form() {
 					/>
 				</Grid>
 
-				<Grid item xs={12} sm={6}>
+				<Grid item>
 					<TextField
 						variant="outlined"
 						label={t("confirmation") + "*"}
@@ -499,26 +494,26 @@ export default function Form() {
 						helperText={errors.confirmation}
 					/>
 				</Grid>
+			</Grid>
+			{/* Submit */}
+			<Grid item>
+				<Button
+					type="submit"
+					sx={{
+						width: "100%",
+						mt: "24px",
+						mb: "24px",
+						height: "42px",
+						fontSize: "0.9375rem",
+					}}
+					color="primary"
+					variant="contained">
+					{t("BtnRegister")}
+				</Button>
 
-				{/* Submit */}
-				<Grid item xs={12}>
-					<Button
-						type="submit"
-						sx={{
-							width: "100%",
-							mb: "24px",
-							height: "42px",
-							fontSize: "0.9375rem",
-						}}
-						color="primary"
-						variant="contained">
-						{t("BtnRegister")}
-					</Button>
-
-					<Link to="/login" style={{ color: "red", textDecoration: "none" }}>
-						{t("RegisterLink1")}
-					</Link>
-				</Grid>
+				<Link to="/login" style={{ color: "red", textDecoration: "none" }}>
+					{t("RegisterLink1")}
+				</Link>
 			</Grid>
 		</form>
 	);

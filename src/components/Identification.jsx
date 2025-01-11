@@ -77,13 +77,22 @@ export default function Identification() {
 				value={values.email}
 				onChange={handleInputChange}
 				sx={{ width: "100%", mb: 2 }}
-				InputProps={{
-					startAdornment: (
-						<InputAdornment position="start">
-							<AlternateEmailIcon />
-						</InputAdornment>
-					),
+				slotProps={{
+					input: {
+						startAdornment: (
+							<InputAdornment position="start">
+								<AlternateEmailIcon />
+							</InputAdornment>
+						),
+					},
 				}}
+				// InputProps={{
+				// 	startAdornment: (
+				// 		<InputAdornment position="start">
+				// 			<AlternateEmailIcon />
+				// 		</InputAdornment>
+				// 	),
+				// }}
 				error={!!errors.email}
 				helperText={errors.email}
 			/>
@@ -102,9 +111,13 @@ export default function Identification() {
 						label={t("psw") + "*"}
 						id="outlined-adornment-password"
 						type={showPassword ? "text" : "password"}
+						startAdornment={
+							<InputAdornment position="start">
+								<VpnKeyIcon />
+							</InputAdornment>
+						}
 						endAdornment={
 							<InputAdornment position="end">
-								<VpnKeyIcon />
 								<IconButton
 									onClick={handleClickShowPassword}
 									onMouseDown={handleMouseDownPassword}

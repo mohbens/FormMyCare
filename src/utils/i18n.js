@@ -4,6 +4,11 @@ import { initReactI18next } from "react-i18next";
 const resources = {
 	en: {
 		translation: {
+			titles: {
+				titleB: "Welcome to ",
+				titleR: "MyCareFlex",
+				titlePRegister: "Create your account",
+			},
 			titleB: "Welcome to ",
 			titleR: "MyCareFlex",
 			titlePRegister: "Create your account",
