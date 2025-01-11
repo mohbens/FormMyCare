@@ -4,7 +4,7 @@ import { createMuiTheme, ThemeProvider } from "@mui/material";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Forgot from "./pages/Forgot.jsx";
-import Test from "./pages/Test.jsx";
+import Test from "./data/test.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const theme = createMuiTheme({
