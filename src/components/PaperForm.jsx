@@ -44,8 +44,7 @@ export default function PaperForm(props) {
 			return <LockOpenIcon sx={{ width: "50px", height: "50px", mr: "8px" }} />;
 		}
 	};
-	console.log(props.typeForm);
-	console.log(handleIcon(props.typeForm));
+
 	return (
 		<div
 			style={{

@@ -6,8 +6,9 @@ import Login from "./pages/Login.jsx";
 import Forgot from "./pages/Forgot.jsx";
 import Test from "./data/test.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { createTheme } from "@mui/material/styles";
 
-const theme = createMuiTheme({
+const theme = createTheme({
 	palette: {
 		primary: {
 			main: "#e53935",
