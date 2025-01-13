@@ -1,6 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { createMuiTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Forgot from "./pages/Forgot.jsx";
@@ -45,9 +44,6 @@ function App() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			{/* <Register />; */}
-			{/* <Login /> */}
-			{/* <Forgot /> */}
 			<RouterProvider router={route}></RouterProvider>
 		</ThemeProvider>
 	);

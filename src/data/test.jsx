@@ -6,20 +6,21 @@ const Test = () => {
 	const RadioOptions = ["Mr", "Mrs"];
 	return (
 		<div
-			style={{
-				display: "flex",
-				justifyContent: " center",
-				alignItems: "center",
-				height: "100vh",
-				width: "500px",
-				margin: "auto",
-			}}>
-			{/* <PaperForm typeForm /> */}
-			<InputField
-				typeInput="Select"
+		// style={{
+		// 	display: "flex",
+		// 	justifyContent: " center",
+		// 	alignItems: "center",
+		// 	height: "100vh",
+		// 	width: "500px",
+		// 	margin: "auto",
+		// }}
+		>
+			<PaperForm typeForm="register" />
+			{/* <InputField
+				typeInput="Radio"
 				InputLabel="Select"
 				Options={SelectOptions}
-			/>
+			/> */}
 		</div>
 	);
 };
