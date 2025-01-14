@@ -1,6 +1,7 @@
 import InputField from "../components/InputField";
 import MySelect from "../components/Fields/MySelect";
 import PublicPage from "../components/PublicPage";
+import MyRadio from "../components/Fields/MyRadio";
 
 const Test = () => {
 	const SelectOptions = [
@@ -21,6 +22,7 @@ const Test = () => {
 	return (
 		<div>
 			<MySelect Options={SelectOptions} Label="MySelect" />
+			<MyRadio Options={SelectOptions} Label="MySelect" />
 		</div>
 	);
 };
