@@ -1,26 +1,26 @@
-import PaperForm from "../components/PaperForm";
 import InputField from "../components/InputField";
+import MySelect from "../components/Fields/MySelect";
+import PublicPage from "../components/PublicPage";
 
 const Test = () => {
-	const SelectOptions = ["Option1", "Option2", "Option3"];
+	const SelectOptions = [
+		{
+			label: "Option1 ",
+			value: "Option1",
+		},
+		{
+			label: "Option2 ",
+			value: "Option2",
+		},
+		{
+			label: "Option3 ",
+			value: "Option3",
+		},
+	];
 	const RadioOptions = ["Mr", "Mrs"];
 	return (
-		<div
-		// style={{
-		// 	display: "flex",
-		// 	justifyContent: " center",
-		// 	alignItems: "center",
-		// 	height: "100vh",
-		// 	width: "500px",
-		// 	margin: "auto",
-		// }}
-		>
-			<PaperForm typeForm="register" />
-			{/* <InputField
-				typeInput="Radio"
-				InputLabel="Select"
-				Options={SelectOptions}
-			/> */}
+		<div>
+			<MySelect Options={SelectOptions} Label="MySelect" />
 		</div>
 	);
 };
