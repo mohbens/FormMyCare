@@ -2,15 +2,26 @@ import { InputAdornment, TextField } from "@mui/material";
 import React from "react";
 
 export default function IconField(props) {
-	console.log(props.Start);
-	const { Start, End, Label, placeholder, name } = props;
-
+	const {
+		Label,
+		Placeholder,
+		Name,
+		val,
+		Start,
+		End,
+		error,
+		helperText,
+		onChange,
+	} = props;
+	console.log(error, helperText);
 	return (
 		<TextField
+			onChange={onChange}
 			variant="outlined"
 			label={Label}
-			placeholder={placeholder}
-			name={name}
+			placeholder={Placeholder}
+			name={Name}
+			value={val}
 			InputProps={{
 				startAdornment: Start && (
 					<InputAdornment position="start">{Start}</InputAdornment>
@@ -20,6 +31,8 @@ export default function IconField(props) {
 				),
 			}}
 			fullWidth
+			error={error}
+			helperText={helperText}
 		/>
 	);
 }

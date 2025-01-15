@@ -230,6 +230,11 @@ export default function Register() {
 								Options={GenderRadio}
 								Label={t("female")}
 								Default={t("male")}
+								OnChange={handleInputChange}
+								isRequired={true}
+								error={!!errors.prenom}
+								helperText={errors.prenom}
+								// Value={values.langue}
 								// isDisabled={true}
 							/>
 
@@ -264,6 +269,10 @@ export default function Register() {
 								Options={LangSelect}
 								Label={t("language")}
 								Default={t("french")}
+								OnChange={handleInputChange}
+								Value={values.langue}
+								error={!!errors.langue}
+								helperText={errors.langue}
 								// isDisabled={true}
 							/>
 							{/* <FormControl fullWidth>
@@ -322,6 +331,8 @@ export default function Register() {
 								Label={t("profession")}
 								Default={t("CHD")}
 								isDisabled={true}
+								error={!!errors.profession}
+								helperText={errors.profession}
 							/>
 
 							{/* <FormControl fullWidth>
@@ -377,6 +388,8 @@ export default function Register() {
 								Options={CountrySelect}
 								Label={t("Country")}
 								Default={t("France")}
+								error={!!errors.country}
+								helperText={errors.country}
 								// isDisabled={true}
 							/>
 
@@ -451,7 +464,7 @@ export default function Register() {
 						<Grid container item sx={{ justifyContent: "space-between" }}>
 							<Grid item xs={5.9} sm={5.8}>
 								<TextField
-									InputLabelProps={{
+									slotProps={{
 										style: { fontWeight: 600 },
 									}}
 									variant="outlined"
@@ -527,7 +540,17 @@ export default function Register() {
 						</Grid>
 
 						<Grid item>
-							<MyMobile />
+							<MyMobile
+								value={values.mobile}
+								OnChange={(e) => {
+									const value = e.target.value;
+									if (/^\d{0,13}$/.test(value)) {
+										handleInputChange(e);
+									}
+								}}
+								Error={!!errors.mobile}
+								HelperText={errors.mobile}
+							/>
 
 							{/* <TextField
 								variant="outlined"
@@ -557,7 +580,11 @@ export default function Register() {
 						</Grid>
 
 						<Grid item>
-							<MyEmail />
+							<MyEmail
+								Value={values.email}
+								Error={!!errors.email}
+								HelperText={errors.email}
+							/>
 
 							{/* <TextField
 								variant="outlined"
@@ -580,7 +607,11 @@ export default function Register() {
 						</Grid>
 
 						<Grid item>
-							<MyConfirmation />
+							<MyConfirmation
+								Value={values.confirmation}
+								Error={!!errors.confirmation}
+								HelperText={errors.confirmation}
+							/>
 							{/* <TextField
 								variant="outlined"
 								label={t("confirmation") + "*"}
