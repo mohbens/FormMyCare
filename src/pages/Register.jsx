@@ -1,30 +1,20 @@
-import {
-	Autocomplete,
-	Button,
-	FormControl,
-	FormControlLabel,
-	InputAdornment,
-	InputLabel,
-	MenuItem,
-	RadioGroup,
-	Select,
-	TextField,
-	Radio,
-	styled,
-} from "@mui/material";
+import { Autocomplete, Button, TextField, styled } from "@mui/material";
 import React, { useState } from "react";
 import "../styles/register.css";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import "../utils/i18n";
 import PublicPage from "../components/PublicPage.jsx";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import PhoneIcon from "@mui/icons-material/Phone";
-import SmartphoneIcon from "@mui/icons-material/Smartphone";
 import Grid from "@mui/material/Grid";
 import CPFr from "../data/france.json";
 import CPBl from "../data/belgique.json";
+import MyRadio from "../components/Fields/MyRadio.jsx";
+import MySelect from "../components/Fields/MySelect.jsx";
+import MyPhone from "../components/Fields/MyPhone.jsx";
+import MyMobile from "../components/Fields/MyMobile.jsx";
+import MyEmail from "../components/Fields/MyEmail.jsx";
+import MyConfirmation from "../components/Fields/MyConfirmation.jsx";
 
 const initialValues = {
 	civilité: "male",
@@ -149,6 +139,72 @@ export default function Register() {
 			background: "#f1f1f1",
 		},
 	}));
+	///////////////////////Data/////////////////////////////////
+	const GenderRadio = [
+		{
+			label: t("male"),
+			value: t("male"),
+		},
+		{
+			label: t("female"),
+			value: t("female"),
+		},
+	];
+	const LangSelect = [
+		{
+			label: t("french"),
+			value: t("french"),
+		},
+		{
+			label: t("english"),
+			value: t("english"),
+		},
+	];
+
+	const ProfSelect = [
+		{
+			label: t("CHD"),
+			value: t("CHD"),
+		},
+	];
+	const SpecialitySelect = [
+		{
+			label: t("GD"),
+			value: t("GD"),
+		},
+		{
+			label: t("Endo"),
+			value: t("Endo"),
+		},
+		{
+			label: t("Maxilo"),
+			value: t("Maxilo"),
+		},
+		{
+			label: t("Ortho"),
+			value: t("Ortho"),
+		},
+		{
+			label: t("Perio"),
+			value: t("Perio"),
+		},
+		{
+			label: t("Pedod"),
+			value: t("Pedod"),
+		},
+	];
+
+	const CountrySelect = [
+		{
+			label: t("CountFr"),
+			value: t("CountFr"),
+		},
+		{
+			label: t("CountBel"),
+			value: t("CountBel"),
+		},
+	];
+	/////////////////////////////////////////////////////////
 	return (
 		<div>
 			<PublicPage
@@ -170,7 +226,14 @@ export default function Register() {
 						// alignItems="flex-start"
 					>
 						<Grid item>
-							<RadioGroup
+							<MyRadio
+								Options={GenderRadio}
+								Label={t("female")}
+								Default={t("male")}
+								// isDisabled={true}
+							/>
+
+							{/* <RadioGroup
 								sx={{
 									border: "1px solid rgba(0, 0, 0, 0.23)",
 									borderRadius: "4px",
@@ -193,11 +256,17 @@ export default function Register() {
 									control={<Radio />}
 									label={t("Mrs.")}
 								/>
-							</RadioGroup>
+							</RadioGroup> */}
 						</Grid>
 
 						<Grid item>
-							<FormControl fullWidth>
+							<MySelect
+								Options={LangSelect}
+								Label={t("language")}
+								Default={t("french")}
+								// isDisabled={true}
+							/>
+							{/* <FormControl fullWidth>
 								<InputLabel id="langue-label">{t("language")}* </InputLabel>
 								<Select
 									labelId="langue-label"
@@ -209,7 +278,7 @@ export default function Register() {
 									<MenuItem value={t("french")}>{t("french")}</MenuItem>
 									<MenuItem value={t("english")}>{t("english")}</MenuItem>
 								</Select>
-							</FormControl>
+							</FormControl> */}
 						</Grid>
 
 						<Grid item>
@@ -248,7 +317,14 @@ export default function Register() {
 						</Grid>
 
 						<Grid item>
-							<FormControl fullWidth>
+							<MySelect
+								Options={ProfSelect}
+								Label={t("profession")}
+								Default={t("CHD")}
+								isDisabled={true}
+							/>
+
+							{/* <FormControl fullWidth>
 								<InputLabel id="profession-label">
 									{t("profession") + " *"}
 								</InputLabel>
@@ -262,11 +338,18 @@ export default function Register() {
 									onChange={handleInputChange}>
 									<MenuItem value={t("CHD")}>{t("CHD")}</MenuItem>
 								</Select>
-							</FormControl>
+							</FormControl> */}
 						</Grid>
 
 						<Grid item>
-							<FormControl
+							<MySelect
+								Options={SpecialitySelect}
+								Label={t("speciality")}
+								// Default={t("CHD")}
+								// isDisabled={true}
+							/>
+
+							{/* <FormControl
 								fullWidth
 								InputLabelProps={{
 									style: { fontWeight: 600 },
@@ -286,11 +369,18 @@ export default function Register() {
 									<MenuItem value={t("Perio")}>{t("Perio")}</MenuItem>
 									<MenuItem value={t("Pedod")}>{t("Pedod")}</MenuItem>
 								</Select>
-							</FormControl>
+							</FormControl> */}
 						</Grid>
 
 						<Grid item>
-							<FormControl fullWidth>
+							<MySelect
+								Options={CountrySelect}
+								Label={t("Country")}
+								Default={t("France")}
+								// isDisabled={true}
+							/>
+
+							{/* <FormControl fullWidth>
 								<InputLabel id="pays-label">{t("Country")} *</InputLabel>
 								<Select
 									id="pays-select"
@@ -304,7 +394,7 @@ export default function Register() {
 										</MenuItem>
 									))}
 								</Select>
-							</FormControl>
+							</FormControl> */}
 						</Grid>
 						<Grid container item sx={{ justifyContent: "space-between" }}>
 							<Grid item xs={8.15} sm={8.15}>
@@ -408,7 +498,8 @@ export default function Register() {
 						</Grid>
 
 						<Grid item>
-							<TextField
+							<MyPhone />
+							{/* <TextField
 								InputLabelProps={{
 									style: { fontWeight: 600 },
 								}}
@@ -432,11 +523,13 @@ export default function Register() {
 									),
 								}}
 								fullWidth
-							/>
+							/> */}
 						</Grid>
 
 						<Grid item>
-							<TextField
+							<MyMobile />
+
+							{/* <TextField
 								variant="outlined"
 								label={t("mobile") + "*"}
 								placeholder={t("mobile")}
@@ -460,11 +553,13 @@ export default function Register() {
 								fullWidth
 								error={!!errors.mobile}
 								helperText={errors.mobile}
-							/>
+							/> */}
 						</Grid>
 
 						<Grid item>
-							<TextField
+							<MyEmail />
+
+							{/* <TextField
 								variant="outlined"
 								label={t("email") + "*"}
 								placeholder={t("email")}
@@ -481,11 +576,12 @@ export default function Register() {
 								fullWidth
 								error={!!errors.email}
 								helperText={errors.email}
-							/>
+							/> */}
 						</Grid>
 
 						<Grid item>
-							<TextField
+							<MyConfirmation />
+							{/* <TextField
 								variant="outlined"
 								label={t("confirmation") + "*"}
 								placeholder={t("confirmation")}
@@ -502,7 +598,7 @@ export default function Register() {
 								fullWidth
 								error={!!errors.confirmation}
 								helperText={errors.confirmation}
-							/>
+							/> */}
 						</Grid>
 					</Grid>
 					{/* Submit */}

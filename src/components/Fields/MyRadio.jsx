@@ -1,9 +1,10 @@
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React from "react";
 
-export default function MyRadio({ Options, Label }) {
+export default function MyRadio({ Options, Label, Default, isDisabled }) {
 	return (
 		<RadioGroup
+			disabled={isDisabled}
 			label="aaa"
 			sx={{
 				border: "1px solid rgba(0, 0, 0, 0.23)",
@@ -15,6 +16,7 @@ export default function MyRadio({ Options, Label }) {
 			}}
 			row
 			name={Label}
+			defaultValue={Default}
 			// value={values.civilité}
 			// onChange={handleInputChange}
 		>
@@ -22,7 +24,7 @@ export default function MyRadio({ Options, Label }) {
 				<FormControlLabel
 					key={option.value}
 					value={option.value}
-					control={<Radio />}
+					control={<Radio disabled={isDisabled} />}
 					label={option.value}
 				/>
 			))}

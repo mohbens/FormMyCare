@@ -1,13 +1,15 @@
 import React from "react";
 import IconField from "./IconField";
 import PhoneIcon from "@mui/icons-material/Phone";
+import { useTranslation } from "react-i18next";
 
-export default function MyEmail() {
+export default function MyPhone() {
+	const { t } = useTranslation();
 	return (
 		<IconField
-			Label="Phone"
-			Placeholder="Phone"
-			name="Phone"
+			Label={t("phone")}
+			Placeholder={t("phone")}
+			name={t("phone")}
 			Start={<PhoneIcon />}
 		/>
 	);

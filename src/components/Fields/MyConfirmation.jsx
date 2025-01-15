@@ -4,13 +4,13 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import IconField from "./IconField";
 
-export default function MyEmail() {
+export default function MyConfirmation() {
 	const { t } = useTranslation();
 	return (
 		<IconField
-			Label={t("email") + " *"}
-			Placeholder={t("email") + " *"}
-			name={t("email")}
+			Label={t("confirmation") + " *"}
+			Placeholder={t("confirmation") + " *"}
+			name="confirmation"
 			Start={<AlternateEmailIcon />}
 		/>
 	);

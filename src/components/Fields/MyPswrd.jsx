@@ -27,7 +27,7 @@ export default function MyPswrd() {
 				{t("psw") + "*"}
 			</InputLabel>
 			<OutlinedInput
-				label="Password"
+				label={t("psw") + "*"}
 				placeholder="Password"
 				name="Password"
 				// label={t("psw") + "*"}

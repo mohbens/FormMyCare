@@ -1,6 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-// {t("")}
+// {t("")}   const { t } = useTranslation();
 const resources = {
 	en: {
 		translation: {
@@ -22,7 +22,7 @@ const resources = {
 			lastName: "Last Name",
 			profession: "Profession",
 			CHD: "Dentist Surgeon",
-			speciality: "speciality",
+			speciality: "Speciality",
 			GD: "General Dentist",
 			Endo: "Endodontist",
 			Maxilo: "Maxillofacial Surgeon",
