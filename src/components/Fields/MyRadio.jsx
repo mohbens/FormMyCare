@@ -4,6 +4,7 @@ import React from "react";
 export default function MyRadio({ Options, Label }) {
 	return (
 		<RadioGroup
+			label="aaa"
 			sx={{
 				border: "1px solid rgba(0, 0, 0, 0.23)",
 				borderRadius: "4px",
@@ -13,12 +14,13 @@ export default function MyRadio({ Options, Label }) {
 				alignItems: "center",
 			}}
 			row
-			name="civilité"
+			name={Label}
 			// value={values.civilité}
 			// onChange={handleInputChange}
 		>
 			{Options.map((option) => (
 				<FormControlLabel
+					key={option.value}
 					value={option.value}
 					control={<Radio />}
 					label={option.value}
