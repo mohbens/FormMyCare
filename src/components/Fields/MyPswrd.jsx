@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import IconField from "./IconField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {
-	Box,
 	FormControl,
+	FormHelperText,
 	IconButton,
 	InputAdornment,
 	InputLabel,
@@ -13,13 +12,14 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-export default function MyPswrd() {
+export default function MyPswrd({ Value, OnChange, Error, HelperText }) {
+	const [showPassword, setShowPassword] = useState(false);
+	const { t } = useTranslation();
+
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault();
 	};
-	const [showPassword, setShowPassword] = useState(false);
-	const { t } = useTranslation();
 
 	return (
 		<FormControl sx={{ width: "100%" }} variant="outlined">
@@ -27,10 +27,11 @@ export default function MyPswrd() {
 				{t("psw") + "*"}
 			</InputLabel>
 			<OutlinedInput
+				name="password"
+				value={Value}
+				onChange={OnChange}
+				error={Error}
 				label={t("psw") + "*"}
-				placeholder="Password"
-				name="Password"
-				// label={t("psw") + "*"}
 				type={showPassword ? "text" : "password"}
 				startAdornment={
 					<InputAdornment position="start">
@@ -48,6 +49,11 @@ export default function MyPswrd() {
 					</InputAdornment>
 				}
 			/>
+			{Error && (
+				<FormHelperText id="password-helper-text" error>
+					{HelperText}
+				</FormHelperText>
+			)}
 		</FormControl>
 	);
 }

@@ -1,20 +1,20 @@
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-
 import React from "react";
 import { useTranslation } from "react-i18next";
 import IconField from "./IconField";
 
-export default function MyEmail({ Value, Error, HelperText }) {
+export default function MyEmail({ Value, OnChange, Error, HelperText }) {
 	const { t } = useTranslation();
 	return (
 		<IconField
-			Label={t("email") + " *"}
-			Placeholder={t("email") + " *"}
-			Name={t("email")}
 			val={Value}
-			Start={<AlternateEmailIcon />}
+			onChange={OnChange}
 			error={Error}
 			helperText={HelperText}
+			Label={t("email") + " *"}
+			Placeholder={t("email") + " *"}
+			Name="email"
+			Start={<AlternateEmailIcon />}
 		/>
 	);
 }

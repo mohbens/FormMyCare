@@ -45,7 +45,18 @@ export default function Register() {
 		{ value: "france", label: t("CountFr"), data: CPFr },
 		{ value: "belgique", label: t("CountBel"), data: CPBl },
 	];
-
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		console.log(name, value);
+		setValues({
+			...values,
+			[name]: value,
+		});
+		if (name === "email") {
+			const error = validateEmail(value);
+			setErrors({ ...errors, email: error });
+		}
+	};
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setValues((prevValues) => ({
@@ -54,7 +65,7 @@ export default function Register() {
 			ville: "",
 			cp: "",
 		}));
-
+		// validate();
 		/////////////////////////////charger les villes
 		const selectedCountry = countries.find(
 			(country) => country.value === value
@@ -83,6 +94,15 @@ export default function Register() {
 	const [errors, setErrors] = useState({});
 	const NumRegex = /^[0-9]{10,}$/;
 
+	const validateEmail = (email) => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!email) {
+			return t("Required");
+		} else if (!emailRegex.test(email)) {
+			return t("InvalidEmail");
+		}
+		return null;
+	};
 	const validate = () => {
 		let temp = {};
 		temp.civilité = values.civilité ? "" : t("Required");
@@ -94,15 +114,19 @@ export default function Register() {
 		temp.numero = NumRegex.test(values.numero) ? "" : t("Required");
 		temp.adresse = values.adresse ? "" : t("Required");
 		temp.mobile = values.mobile ? "" : t("Required");
-
+		temp.email = values.email ? "" : t("Required");
 		// Email regex
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		temp.email = emailRegex.test(values.email) ? "" : t("InvalidEmail");
+		// const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		// temp.email = emailRegex.test(values.email) ? "" : t("InvalidEmail");
 
 		// Confirmation email
-		temp.confirmation =
-			values.confirmation === values.email ? "" : t("EmailConf");
-
+		if (!values.confirmation) {
+			temp.confirmation = t("Required");
+		} else if (values.confirmation !== values.email) {
+			temp.confirmation = t("EmailConf");
+		} else {
+			temp.confirmation = "";
+		}
 		setErrors(temp);
 
 		return Object.values(temp).every((x) => x === "");
@@ -541,7 +565,7 @@ export default function Register() {
 
 						<Grid item>
 							<MyMobile
-								value={values.mobile}
+								Value={values.mobile}
 								OnChange={(e) => {
 									const value = e.target.value;
 									if (/^\d{0,13}$/.test(value)) {
@@ -582,11 +606,12 @@ export default function Register() {
 						<Grid item>
 							<MyEmail
 								Value={values.email}
+								OnChange={handleChange}
 								Error={!!errors.email}
 								HelperText={errors.email}
 							/>
-
-							{/* <TextField
+							{/* 
+							<TextField
 								variant="outlined"
 								label={t("email") + "*"}
 								placeholder={t("email")}
@@ -608,6 +633,7 @@ export default function Register() {
 
 						<Grid item>
 							<MyConfirmation
+								OnChange={handleChange}
 								Value={values.confirmation}
 								Error={!!errors.confirmation}
 								HelperText={errors.confirmation}

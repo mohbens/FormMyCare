@@ -13,7 +13,7 @@ export default function IconField(props) {
 		helperText,
 		onChange,
 	} = props;
-	console.log(error, helperText);
+	// console.log(error, helperText);
 	return (
 		<TextField
 			onChange={onChange}

@@ -2,26 +2,13 @@ import React, { useState } from "react";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import "../utils/i18n";
 import PublicPage from "../components/PublicPage.jsx";
-import {
-	Box,
-	Button,
-	Checkbox,
-	FormControlLabel,
-	FormHelperText,
-	IconButton,
-	InputAdornment,
-	InputLabel,
-	OutlinedInput,
-	TextField,
-} from "@mui/material";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import FormControl from "@mui/material/FormControl";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { Box, Button, Checkbox, FormControlLabel, Grid } from "@mui/material";
+
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../utils/i18n";
+import MyEmail from "../components/Fields/MyEmail.jsx";
+import MyPswrd from "../components/Fields/MyPswrd.jsx";
 
 export default function Login() {
 	const { t } = useTranslation();
@@ -31,7 +18,6 @@ export default function Login() {
 	};
 
 	const [values, setValues] = useState(initialValues);
-	const [showPassword, setShowPassword] = useState(false);
 	const [errors, setErrors] = useState({});
 
 	const handleInputChange = (e) => {
@@ -40,11 +26,6 @@ export default function Login() {
 			...values,
 			[name]: value,
 		});
-	};
-
-	const handleClickShowPassword = () => setShowPassword((show) => !show);
-	const handleMouseDownPassword = (event) => {
-		event.preventDefault();
 	};
 
 	const validate = () => {
@@ -79,7 +60,14 @@ export default function Login() {
 				}
 				pageTitle="titlePLogin">
 				<Box component="form" onSubmit={handleSubmit}>
-					<TextField
+					<Grid display={"grid"} gridTemplateColumns={"1fr "} gap={2} container>
+						<MyEmail
+							Value={values.email}
+							OnChange={handleInputChange}
+							Error={!!errors.email}
+							HelperText={errors.email}
+						/>
+						{/* <TextField
 						name="email"
 						label={t("email") + "*"}
 						value={values.email}
@@ -96,43 +84,50 @@ export default function Login() {
 						}}
 						error={!!errors.email}
 						helperText={errors.email}
-					/>
+					/> */}
 
-					<Box>
-						<FormControl sx={{ width: "100%" }} variant="outlined">
-							<InputLabel htmlFor="outlined-adornment-password">
-								{t("psw") + "*"}
-							</InputLabel>
-							<OutlinedInput
-								name="password"
-								value={values.password}
-								onChange={handleInputChange}
-								error={!!errors.password}
-								helperText={errors.password}
-								label={t("psw") + "*"}
-								id="outlined-adornment-password"
-								type={showPassword ? "text" : "password"}
-								startAdornment={
-									<InputAdornment position="start">
-										<VpnKeyIcon />
-									</InputAdornment>
-								}
-								endAdornment={
-									<InputAdornment position="end">
-										<IconButton
-											onClick={handleClickShowPassword}
-											onMouseDown={handleMouseDownPassword}
-											edge="end">
-											{showPassword ? <VisibilityOff /> : <Visibility />}
-										</IconButton>
-									</InputAdornment>
-								}
+						<Box>
+							<MyPswrd
+								Value={values.password}
+								OnChange={handleInputChange}
+								Error={!!errors.password}
+								HelperText={errors.password}
 							/>
-							<FormHelperText id="password-helper-text" error>
-								{errors.password}
-							</FormHelperText>
-						</FormControl>
-					</Box>
+							{/* <FormControl sx={{ width: "100%" }} variant="outlined">
+								<InputLabel htmlFor="outlined-adornment-password">
+									{t("psw") + "*"}
+								</InputLabel>
+								<OutlinedInput
+									name="password"
+									value={values.password}
+									onChange={handleInputChange}
+									error={!!errors.password}
+									helperText={errors.password}
+									label={t("psw") + "*"}
+									id="outlined-adornment-password"
+									type={showPassword ? "text" : "password"}
+									startAdornment={
+										<InputAdornment position="start">
+											<VpnKeyIcon />
+										</InputAdornment>
+									}
+									endAdornment={
+										<InputAdornment position="end">
+											<IconButton
+												onClick={handleClickShowPassword}
+												onMouseDown={handleMouseDownPassword}
+												edge="end">
+												{showPassword ? <VisibilityOff /> : <Visibility />}
+											</IconButton>
+										</InputAdornment>
+									}
+								/>
+								<FormHelperText id="password-helper-text" error>
+									{errors.password}
+								</FormHelperText>
+							</FormControl> */}
+						</Box>
+					</Grid>
 
 					<Box>
 						<FormControlLabel

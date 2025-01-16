@@ -11,7 +11,7 @@ export default function MyConfirmation({ OnChange, Value, Error, HelperText }) {
 			onChange={OnChange}
 			Label={t("confirmation") + " *"}
 			Placeholder={t("confirmation") + " *"}
-			Name={t("confirmation")}
+			Name="confirmation"
 			val={Value}
 			Start={<AlternateEmailIcon />}
 			error={Error}
