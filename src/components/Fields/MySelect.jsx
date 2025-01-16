@@ -12,6 +12,7 @@ export default function MySelect({
 	Error,
 	HelperText,
 }) {
+	console.log("option", Options, "Default", Default);
 	return (
 		<FormControl fullWidth>
 			<InputLabel id="my-select-label">{Label}</InputLabel>
@@ -23,7 +24,9 @@ export default function MySelect({
 				defaultValue={Default}
 				value={Value}
 				onChange={OnChange}
-				placeholder="Select an option">
+				placeholder="Select an option"
+				error={Error}
+				helperText={HelperText}>
 				{Options.map((option) => (
 					<MenuItem key={option.value} value={option.value}>
 						{option.label}

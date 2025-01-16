@@ -37,7 +37,7 @@ export default function MyRadio({
 					key={option.value}
 					value={option.value}
 					control={<Radio disabled={isDisabled} />}
-					label={option.value}
+					label={option.label}
 				/>
 			))}
 		</RadioGroup>

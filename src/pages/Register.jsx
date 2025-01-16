@@ -15,6 +15,7 @@ import MyPhone from "../components/Fields/MyPhone.jsx";
 import MyMobile from "../components/Fields/MyMobile.jsx";
 import MyEmail from "../components/Fields/MyEmail.jsx";
 import MyConfirmation from "../components/Fields/MyConfirmation.jsx";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 const initialValues = {
 	civilité: "male",
@@ -109,15 +110,13 @@ export default function Register() {
 		temp.langue = values.langue ? "" : t("Required");
 		temp.prenom = values.prenom ? "" : t("Required");
 		temp.nom = values.nom ? "" : t("Required");
+		temp.profession = values.profession ? "" : t("Required");
 		temp.pays = values.pays ? "" : t("Required");
 		temp.ville = values.ville ? "" : t("Required");
 		temp.numero = NumRegex.test(values.numero) ? "" : t("Required");
 		temp.adresse = values.adresse ? "" : t("Required");
 		temp.mobile = values.mobile ? "" : t("Required");
 		temp.email = values.email ? "" : t("Required");
-		// Email regex
-		// const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		// temp.email = emailRegex.test(values.email) ? "" : t("InvalidEmail");
 
 		// Confirmation email
 		if (!values.confirmation) {
@@ -167,65 +166,65 @@ export default function Register() {
 	const GenderRadio = [
 		{
 			label: t("male"),
-			value: t("male"),
+			value: "male",
 		},
 		{
 			label: t("female"),
-			value: t("female"),
+			value: "female",
 		},
 	];
 	const LangSelect = [
 		{
 			label: t("french"),
-			value: t("french"),
+			value: "french",
 		},
 		{
 			label: t("english"),
-			value: t("english"),
+			value: "english",
 		},
 	];
 
 	const ProfSelect = [
 		{
 			label: t("CHD"),
-			value: t("CHD"),
+			value: "CHD",
 		},
 	];
 	const SpecialitySelect = [
 		{
 			label: t("GD"),
-			value: t("GD"),
+			value: "GD",
 		},
 		{
 			label: t("Endo"),
-			value: t("Endo"),
+			value: "Endo",
 		},
 		{
 			label: t("Maxilo"),
-			value: t("Maxilo"),
+			value: "Maxilo",
 		},
 		{
 			label: t("Ortho"),
-			value: t("Ortho"),
+			value: "Ortho",
 		},
 		{
 			label: t("Perio"),
-			value: t("Perio"),
+			value: "Perio",
 		},
 		{
 			label: t("Pedod"),
-			value: t("Pedod"),
+			value: "Pedod",
 		},
 	];
 
 	const CountrySelect = [
 		{
 			label: t("CountFr"),
-			value: t("CountFr"),
+			value: "CountFr",
 		},
 		{
 			label: t("CountBel"),
-			value: t("CountBel"),
+			value: "CountBel",
 		},
 	];
 	/////////////////////////////////////////////////////////
@@ -252,8 +251,8 @@ export default function Register() {
 						<Grid item>
 							<MyRadio
 								Options={GenderRadio}
-								Label={t("female")}
-								Default={t("male")}
+								Label={t("gender")}
+								Default="male"
 								OnChange={handleInputChange}
 								isRequired={true}
 								error={!!errors.prenom}
@@ -261,57 +260,19 @@ export default function Register() {
 								// Value={values.langue}
 								// isDisabled={true}
 							/>
-
-							{/* <RadioGroup
-								sx={{
-									border: "1px solid rgba(0, 0, 0, 0.23)",
-									borderRadius: "4px",
-									padding: "8px",
-									display: "flex",
-									flexDirection: "row",
-									alignItems: "center",
-								}}
-								row
-								name="civilité"
-								value={values.civilité}
-								onChange={handleInputChange}>
-								<FormControlLabel
-									value="male"
-									control={<Radio />}
-									label={t("male")}
-								/>
-								<FormControlLabel
-									value="female"
-									control={<Radio />}
-									label={t("Mrs.")}
-								/>
-							</RadioGroup> */}
 						</Grid>
 
 						<Grid item>
 							<MySelect
 								Options={LangSelect}
 								Label={t("language")}
-								// Default={t("french")}
+								Default="french"
 								OnChange={handleChange}
 								// Value={values.langue}
 								// Error={!!errors.langue}
 								// HelperText={errors.langue}
 								// isDisabled={true}
 							/>
-							{/* <FormControl fullWidth>
-								<InputLabel id="langue-label">{t("language")}* </InputLabel>
-								<Select
-									labelId="langue-label"
-									id="langue-select"
-									value={values.langue}
-									label={t("language")}
-									onChange={handleInputChange}
-									name={t("language")}>
-									<MenuItem value={t("french")}>{t("french")}</MenuItem>
-									<MenuItem value={t("english")}>{t("english")}</MenuItem>
-								</Select>
-							</FormControl> */}
 						</Grid>
 
 						<Grid item>
@@ -353,27 +314,12 @@ export default function Register() {
 							<MySelect
 								Options={ProfSelect}
 								Label={t("profession")}
-								Default={t("CHD")}
+								Default="CHD"
 								isDisabled={true}
+								// isRequired={true}
 								error={!!errors.profession}
 								helperText={errors.profession}
 							/>
-
-							{/* <FormControl fullWidth>
-								<InputLabel id="profession-label">
-									{t("profession") + " *"}
-								</InputLabel>
-								<Select
-									disabled
-									labelId="demo-simple-select-helper-label"
-									id="demo-simple-select-helper"
-									value={values.profession}
-									label={t("profession") + " *"}
-									sx={{ width: "100%" }}
-									onChange={handleInputChange}>
-									<MenuItem value={t("CHD")}>{t("CHD")}</MenuItem>
-								</Select>
-							</FormControl> */}
 						</Grid>
 
 						<Grid item>
@@ -384,55 +330,17 @@ export default function Register() {
 								// Default={t("CHD")}
 								// isDisabled={true}
 							/>
-
-							{/* <FormControl
-								fullWidth
-								InputLabelProps={{
-									style: { fontWeight: 600 },
-								}}>
-								<InputLabel id="specialite-label">{t("speciality")}</InputLabel>
-								<Select
-									labelId="specialite-label"
-									id="specialite-select"
-									value={values.spécialité}
-									label={t("speciality")}
-									onChange={handleInputChange}
-									name="speciality">
-									<MenuItem value={t("GD")}>{t("GD")}</MenuItem>
-									<MenuItem value={t("Endo")}>{t("Endo")}</MenuItem>
-									<MenuItem value={t("Maxilo")}>{t("Maxilo")}</MenuItem>
-									<MenuItem value={t("Ortho")}>{t("Ortho")}</MenuItem>
-									<MenuItem value={t("Perio")}>{t("Perio")}</MenuItem>
-									<MenuItem value={t("Pedod")}>{t("Pedod")}</MenuItem>
-								</Select>
-							</FormControl> */}
 						</Grid>
 
 						<Grid item>
 							<MySelect
 								Options={CountrySelect}
 								Label={t("Country")}
-								Default={t("France")}
+								Default="CountFr"
 								error={!!errors.country}
 								helperText={errors.country}
 								// isDisabled={true}
 							/>
-
-							{/* <FormControl fullWidth>
-								<InputLabel id="pays-label">{t("Country")} *</InputLabel>
-								<Select
-									id="pays-select"
-									value={values.pays}
-									label={t("Country") + "*"}
-									onChange={handleInputChange}
-									name="pays">
-									{countries.map((option) => (
-										<MenuItem key={option.value} value={option.value}>
-											{option.label}
-										</MenuItem>
-									))}
-								</Select>
-							</FormControl> */}
 						</Grid>
 						<Grid container item sx={{ justifyContent: "space-between" }}>
 							<Grid item xs={8.15} sm={8.15}>
@@ -456,8 +364,6 @@ export default function Register() {
 											helperText={errors.ville}
 										/>
 									)}
-									// onChange={(event, newValue) => {}}
-									// sx={{ width: "70%" }}
 									ListboxComponent={CustomAutocomplete}
 									componentsProps={{
 										paper: {
@@ -536,36 +442,24 @@ export default function Register() {
 						</Grid>
 
 						<Grid item>
-							<MyPhone />
-							{/* <TextField
-								InputLabelProps={{
-									style: { fontWeight: 600 },
-								}}
-								variant="outlined"
-								label={t("phone") + "*"}
-								placeholder={t("phone")}
-								name="téléphone"
-								value={values.téléphone}
-								// value={`+33${values.téléphone}`}
-								onChange={(e) => {
-									const value = e.target.value;
-									if (/^\d{0,13}$/.test(value)) {
-										handleInputChange(e);
-									}
-								}}
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position="start">
-											<PhoneIcon />
-										</InputAdornment>
-									),
-								}}
-								fullWidth
-							/> */}
+							<MyPhone
+								Label={t("phone")}
+								PlaceHolder={t("phone")}
+								Name="phone"
+								Value={values.phone}
+								isMobile={false}
+							/>
 						</Grid>
 
 						<Grid item>
-							<MyMobile
+							<MyPhone
+								Label={t("phone")}
+								PlaceHolder={t("phone")}
+								Name="phone"
+								Value={values.phone}
+								isMobile={true}
+							/>
+							{/* <MyMobile
 								Value={values.mobile}
 								OnChange={(e) => {
 									const value = e.target.value;
@@ -575,32 +469,6 @@ export default function Register() {
 								}}
 								Error={!!errors.mobile}
 								HelperText={errors.mobile}
-							/>
-
-							{/* <TextField
-								variant="outlined"
-								label={t("mobile") + "*"}
-								placeholder={t("mobile")}
-								name="mobile"
-								value={values.mobile}
-								// value={`+33${values.mobile}`}
-								onChange={(e) => {
-									const value = e.target.value;
-									if (/^\d{0,13}$/.test(value)) {
-										handleInputChange(e);
-									}
-								}}
-								inputProps={{ maxLength: 13 }}
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position="start">
-											<SmartphoneIcon />
-										</InputAdornment>
-									),
-								}}
-								fullWidth
-								error={!!errors.mobile}
-								helperText={errors.mobile}
 							/> */}
 						</Grid>
 
@@ -611,25 +479,6 @@ export default function Register() {
 								Error={!!errors.email}
 								HelperText={errors.email}
 							/>
-							{/* 
-							<TextField
-								variant="outlined"
-								label={t("email") + "*"}
-								placeholder={t("email")}
-								name="email"
-								value={values.email}
-								onChange={handleInputChange}
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position="start">
-											<AlternateEmailIcon />
-										</InputAdornment>
-									),
-								}}
-								fullWidth
-								error={!!errors.email}
-								helperText={errors.email}
-							/> */}
 						</Grid>
 
 						<Grid item>
@@ -639,24 +488,6 @@ export default function Register() {
 								Error={!!errors.confirmation}
 								HelperText={errors.confirmation}
 							/>
-							{/* <TextField
-								variant="outlined"
-								label={t("confirmation") + "*"}
-								placeholder={t("confirmation")}
-								name="confirmation"
-								value={values.confirmation}
-								onChange={handleInputChange}
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position="start">
-											<AlternateEmailIcon />
-										</InputAdornment>
-									),
-								}}
-								fullWidth
-								error={!!errors.confirmation}
-								helperText={errors.confirmation}
-							/> */}
 						</Grid>
 					</Grid>
 					{/* Submit */}

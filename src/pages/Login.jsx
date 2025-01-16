@@ -62,6 +62,7 @@ export default function Login() {
 				<Box component="form" onSubmit={handleSubmit}>
 					<Grid display={"grid"} gridTemplateColumns={"1fr "} gap={2} container>
 						<MyEmail
+							Name="email"
 							Value={values.email}
 							OnChange={handleInputChange}
 							Error={!!errors.email}
@@ -88,6 +89,7 @@ export default function Login() {
 
 						<Box>
 							<MyPswrd
+								Name="password"
 								Value={values.password}
 								OnChange={handleInputChange}
 								Error={!!errors.password}

@@ -16,6 +16,27 @@ const theme = createTheme({
 			main: "#ff1744",
 		},
 	},
+	components: {
+		MuiOutlinedInput: {
+			styleOverrides: {
+				root: {
+					"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+						borderColor: "blue", // Focused border color
+					},
+				},
+			},
+		},
+		MuiInputLabel: {
+			styleOverrides: {
+				outlined: {
+					color: "gray", // Default label color
+					"&.Mui-focused": {
+						color: "blue", // Label color when focused
+					},
+				},
+			},
+		},
+	},
 });
 
 function App() {

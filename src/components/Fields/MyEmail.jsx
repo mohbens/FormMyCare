@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import IconField from "./IconField";
 
-export default function MyEmail({ Value, OnChange, Error, HelperText }) {
+export default function MyEmail({ Name, Value, OnChange, Error, HelperText }) {
 	const { t } = useTranslation();
 	return (
 		<IconField
@@ -13,7 +13,7 @@ export default function MyEmail({ Value, OnChange, Error, HelperText }) {
 			helperText={HelperText}
 			Label={t("email") + " *"}
 			Placeholder={t("email") + " *"}
-			Name="email"
+			Name={Name}
 			Start={<AlternateEmailIcon />}
 		/>
 	);

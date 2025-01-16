@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-export default function MyPswrd({ Value, OnChange, Error, HelperText }) {
+export default function MyPswrd({ Name, Value, OnChange, Error, HelperText }) {
 	const [showPassword, setShowPassword] = useState(false);
 	const { t } = useTranslation();
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -26,7 +26,7 @@ export default function MyPswrd({ Value, OnChange, Error, HelperText }) {
 				{t("psw") + "*"}
 			</InputLabel>
 			<OutlinedInput
-				name="password"
+				name={Name}
 				value={Value}
 				onChange={OnChange}
 				error={Error}
