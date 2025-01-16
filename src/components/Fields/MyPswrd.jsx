@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 export default function MyPswrd({ Value, OnChange, Error, HelperText }) {
 	const [showPassword, setShowPassword] = useState(false);
 	const { t } = useTranslation();
-
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault();

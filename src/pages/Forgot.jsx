@@ -1,12 +1,13 @@
 import React from "react";
 import PublicPage from "../components/PublicPage.jsx";
 import PasswordIcon from "@mui/icons-material/Password";
-import { Box, Button, InputAdornment, TextField } from "@mui/material";
+import { Box, Button, Grid, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import { Link } from "react-router-dom";
 import "../utils/i18n";
 import { useTranslation } from "react-i18next";
+import MyEmail from "../components/Fields/MyEmail.jsx";
 
 export default function Forgot() {
 	const { t } = useTranslation();
@@ -32,6 +33,27 @@ export default function Forgot() {
 			[name]: value,
 		});
 	};
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		console.log(name, value);
+		setValues({
+			...values,
+			[name]: value,
+		});
+		if (name === "email") {
+			const error = validateEmail(value);
+			setErrors({ ...errors, email: error });
+		}
+	};
+	const validateEmail = (email) => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!email) {
+			return t("Required");
+		} else if (!emailRegex.test(email)) {
+			return t("InvalidEmail");
+		}
+		return null;
+	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -51,30 +73,21 @@ export default function Forgot() {
 				}
 				pageTitle="titlePForgot">
 				<Box component="form" onSubmit={handleSubmit}>
-					<TextField
-						name="email"
-						value={values.email}
-						onChange={handleInputChange}
-						label={t("email") + "*"}
-						placeholder={t("email")}
-						sx={{ width: "100%", mb: 2 }}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<AlternateEmailIcon />
-								</InputAdornment>
-							),
-						}}
-						error={!!errors.email}
-						helperText={errors.email}
-					/>
-					<Button
-						type="submit"
-						sx={{ height: "42px", width: "100%" }}
-						color="primary"
-						variant="contained">
-						{t("btnForgot")}
-					</Button>
+					<Grid display={"grid"} gridTemplateColumns={"1fr "} gap={2} container>
+						<MyEmail
+							Value={values.email}
+							OnChange={handleChange}
+							Error={!!errors.email}
+							HelperText={errors.email}
+						/>
+						<Button
+							type="submit"
+							sx={{ height: "42px", width: "100%" }}
+							color="primary"
+							variant="contained">
+							{t("btnForgot")}
+						</Button>
+					</Grid>
 
 					<Box sx={{ display: "flex", justifyContent: "space-between" }}>
 						<Link

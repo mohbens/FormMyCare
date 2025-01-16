@@ -292,11 +292,11 @@ export default function Register() {
 							<MySelect
 								Options={LangSelect}
 								Label={t("language")}
-								Default={t("french")}
-								OnChange={handleInputChange}
-								Value={values.langue}
-								error={!!errors.langue}
-								helperText={errors.langue}
+								// Default={t("french")}
+								OnChange={handleChange}
+								// Value={values.langue}
+								// Error={!!errors.langue}
+								// HelperText={errors.langue}
 								// isDisabled={true}
 							/>
 							{/* <FormControl fullWidth>
@@ -380,6 +380,7 @@ export default function Register() {
 							<MySelect
 								Options={SpecialitySelect}
 								Label={t("speciality")}
+
 								// Default={t("CHD")}
 								// isDisabled={true}
 							/>

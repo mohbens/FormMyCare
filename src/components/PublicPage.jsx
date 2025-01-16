@@ -59,7 +59,6 @@ export default function PublicPage(props) {
 								width: "100%",
 								marginTop: "16px",
 								marginBottom: "15px",
-								// borderColor: "rgba(0, 0, 0, 0.12);",
 							}}></hr>
 
 						{children}
