@@ -476,6 +476,7 @@ export default function Register() {
 							<MyEmail
 								Value={values.email}
 								OnChange={handleChange}
+								Name="email"
 								Error={!!errors.email}
 								HelperText={errors.email}
 							/>
@@ -485,6 +486,7 @@ export default function Register() {
 							<MyConfirmation
 								OnChange={handleChange}
 								Value={values.confirmation}
+								Name="email"
 								Error={!!errors.confirmation}
 								HelperText={errors.confirmation}
 							/>
