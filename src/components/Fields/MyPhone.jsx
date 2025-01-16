@@ -50,8 +50,13 @@ export default function MyPhone({ Value, Label, PlaceHolder, Name, isMobile }) {
 	const handleChange = (event) => {
 		const inputValue = event.target.value;
 
-		if (/^\d*$/.test(inputValue) && inputValue.length <= 10) {
+		if (/^\+33\d*$/.test(inputValue) && inputValue.length <= 13) {
 			setPhoneValue(inputValue);
+		}
+	};
+	const handleFocus = () => {
+		if (!phoneValue) {
+			setPhoneValue("+33");
 		}
 	};
 
@@ -63,6 +68,7 @@ export default function MyPhone({ Value, Label, PlaceHolder, Name, isMobile }) {
 			val={phoneValue}
 			Start={Icon}
 			onChange={handleChange}
+			onFocus={handleFocus}
 		/>
 	);
 }
