@@ -59,6 +59,12 @@ export default function MyPhone({ Value, Label, PlaceHolder, Name, isMobile }) {
 			setPhoneValue("+33");
 		}
 	};
+	const handleBlur = () => {
+		console.log("aaa");
+		if (phoneValue === "+33") {
+			setPhoneValue("");
+		}
+	};
 
 	return (
 		<IconField
@@ -69,6 +75,7 @@ export default function MyPhone({ Value, Label, PlaceHolder, Name, isMobile }) {
 			Start={Icon}
 			onChange={handleChange}
 			onFocus={handleFocus}
+			onBlur={handleBlur}
 		/>
 	);
 }

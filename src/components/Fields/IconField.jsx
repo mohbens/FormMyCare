@@ -12,7 +12,8 @@ export default function IconField(props) {
 		error,
 		helperText,
 		onChange,
-		// onFocus,
+		onFocus,
+		onBlur,
 	} = props;
 	// console.log(error, helperText);
 	return (
@@ -23,7 +24,7 @@ export default function IconField(props) {
 			placeholder={Placeholder}
 			name={Name}
 			value={val}
-			// onFocus={onFocus}
+			onFocus={onFocus}
 			InputProps={{
 				startAdornment: Start && (
 					<InputAdornment position="start">{Start}</InputAdornment>
@@ -35,6 +36,7 @@ export default function IconField(props) {
 			fullWidth
 			error={error}
 			helperText={helperText}
+			onBlur={onBlur}
 		/>
 	);
 }
