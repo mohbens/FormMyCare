@@ -121,6 +121,9 @@ export default function Register() {
 		// Confirmation email
 		if (!values.confirmation) {
 			temp.confirmation = t("Required");
+			if (values.confirmation !== values.email) {
+				temp.confirmation = temp.confirmation += "\n" + t("EmailConf");
+			}
 		} else if (values.confirmation !== values.email) {
 			temp.confirmation = t("EmailConf");
 		} else {
@@ -461,17 +464,6 @@ export default function Register() {
 								Error={!!errors.confirmation}
 								HelperText={errors.confirmation}
 							/>
-							{/* <MyMobile
-								Value={values.mobile}
-								OnChange={(e) => {
-									const value = e.target.value;
-									if (/^\d{0,13}$/.test(value)) {
-										handleInputChange(e);
-									}
-								}}
-								Error={!!errors.mobile}
-								HelperText={errors.mobile}
-							/> */}
 						</Grid>
 
 						<Grid item>

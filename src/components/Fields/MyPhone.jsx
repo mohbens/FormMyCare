@@ -41,12 +41,9 @@ export default function MyPhone({
 		}
 	};
 
-	// const [theError, setTheError] = useState(Error);
 	const handleFocus = () => {
 		if (!phoneValue) {
 			setPhoneValue("+33");
-			// setTheError(false);
-			// HelperText = "";
 		}
 	};
 
