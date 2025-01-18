@@ -14,6 +14,9 @@ export default function IconField(props) {
 		onChange,
 		onFocus,
 		onBlur,
+		Oncopy,
+		Onpaste,
+		OnCut,
 	} = props;
 	// console.log(error, helperText);
 	return (
@@ -37,6 +40,10 @@ export default function IconField(props) {
 			error={error}
 			helperText={helperText}
 			onBlur={onBlur}
+			onCopy={Oncopy}
+			onPaste={Onpaste}
+			onCut={OnCut}
+			// autocomplete={Autocomplete}
 		/>
 	);
 }

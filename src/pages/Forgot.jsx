@@ -1,9 +1,8 @@
 import React from "react";
 import PublicPage from "../components/PublicPage.jsx";
 import PasswordIcon from "@mui/icons-material/Password";
-import { Box, Button, Grid, InputAdornment, TextField } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { useState } from "react";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import { Link } from "react-router-dom";
 import "../utils/i18n";
 import { useTranslation } from "react-i18next";
@@ -26,13 +25,13 @@ export default function Forgot() {
 
 		return Object.values(tempErrors).every((x) => x === "");
 	};
-	const handleInputChange = (e) => {
-		const { name, value } = e.target;
-		setValues({
-			...values,
-			[name]: value,
-		});
-	};
+	// const handleInputChange = (e) => {
+	// 	const { name, value } = e.target;
+	// 	setValues({
+	// 		...values,
+	// 		[name]: value,
+	// 	});
+	// };
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		console.log(name, value);
@@ -75,6 +74,7 @@ export default function Forgot() {
 				<Box component="form" onSubmit={handleSubmit}>
 					<Grid display={"grid"} gridTemplateColumns={"1fr "} gap={2} container>
 						<MyEmail
+							Name="email"
 							Value={values.email}
 							OnChange={handleChange}
 							Error={!!errors.email}

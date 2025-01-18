@@ -60,6 +60,7 @@ const resources = {
 			Required: "Required field",
 			InvalidEmail: "Invalid email",
 			EmailConf: "Confirmation must match the email",
+			Phone10d: "Must be 10 characters",
 		},
 	},
 	fr: {
@@ -115,6 +116,7 @@ const resources = {
 			Required: "champ requis",
 			InvalidEmail: "email invalide",
 			EmailConf: "La confirmation doit correspondre à l'email",
+			Phone10d: "Doit être de 10 caractères",
 		},
 	},
 };

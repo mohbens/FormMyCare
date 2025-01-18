@@ -40,7 +40,15 @@ export default function Login() {
 
 		return Object.values(tempErrors).every((x) => x === "");
 	};
-
+	const validateEmail = (email) => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!email) {
+			return t("Required");
+		} else if (!emailRegex.test(email)) {
+			return t("InvalidEmail");
+		}
+		return null;
+	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -50,6 +58,18 @@ export default function Login() {
 			setErrors({});
 		} else {
 			console.log("Validation errors:", errors);
+		}
+	};
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		console.log(name, value);
+		setValues({
+			...values,
+			[name]: value,
+		});
+		if (name === "email") {
+			const error = validateEmail(value);
+			setErrors({ ...errors, email: error });
 		}
 	};
 	return (
@@ -64,7 +84,7 @@ export default function Login() {
 						<MyEmail
 							Name="email"
 							Value={values.email}
-							OnChange={handleInputChange}
+							OnChange={handleChange}
 							Error={!!errors.email}
 							HelperText={errors.email}
 						/>

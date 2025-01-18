@@ -1,51 +1,29 @@
-// import React from "react";
-// import IconField from "./IconField";
-// import PhoneIcon from "@mui/icons-material/Phone";
-// import SmartphoneIcon from "@mui/icons-material/Smartphone";
-
-// import { useTranslation } from "react-i18next";
-
-// export default function MyPhone({
-// 	Value,
-// 	Label,
-// 	PlaceHolder,
-// 	Name,
-// 	isMobile,
-// 	Icon,
-// }) {
-// 	const { t } = useTranslation();
-// 	if (isMobile) {
-// 		Icon = <SmartphoneIcon />;
-// 	} else {
-// 		Icon = <PhoneIcon />;
-// 	}
-
-// 	return (
-// 		<IconField
-// 			Label={Label}
-// 			Placeholder={PlaceHolder}
-// 			name={Name}
-// 			Start={Icon}
-// 			value={Value}
-// 		/>
-// 	);
-// }
 import React, { useState } from "react";
 import IconField from "./IconField";
 import PhoneIcon from "@mui/icons-material/Phone";
 import SmartphoneIcon from "@mui/icons-material/Smartphone";
 
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 
-export default function MyPhone({ Value, Label, PlaceHolder, Name, isMobile }) {
-	const { t } = useTranslation();
+export default function MyPhone({
+	Value,
+	Label,
+	PlaceHolder,
+	Name,
+	isMobile,
+	Error,
+	HelperText,
+}) {
+	// const { t } = useTranslation();
 	const [phoneValue, setPhoneValue] = useState(Value || "");
 
 	if (isMobile) {
 		var Icon = <SmartphoneIcon />;
 	} else {
-		var Icon = <PhoneIcon />;
+		Icon = <PhoneIcon />;
 	}
+	const [err, setErr] = useState(Error);
+	const [helperTxt, setHelperTxt] = useState(HelperText);
 
 	const handleChange = (event) => {
 		const inputValue = event.target.value;
@@ -53,14 +31,27 @@ export default function MyPhone({ Value, Label, PlaceHolder, Name, isMobile }) {
 		if (/^\+33\d*$/.test(inputValue) && inputValue.length <= 13) {
 			setPhoneValue(inputValue);
 		}
+		if (inputValue.length >= 13) {
+			console.log(inputValue.length, inputValue);
+			setErr(false);
+			setHelperTxt("");
+		} else {
+			setErr(true);
+			setHelperTxt("Must be 10 digits ");
+		}
 	};
+
+	// const [theError, setTheError] = useState(Error);
 	const handleFocus = () => {
 		if (!phoneValue) {
 			setPhoneValue("+33");
+			// setTheError(false);
+			// HelperText = "";
 		}
 	};
+
 	const handleBlur = () => {
-		console.log("aaa");
+		console.log("Blur");
 		if (phoneValue === "+33") {
 			setPhoneValue("");
 		}
@@ -76,6 +67,8 @@ export default function MyPhone({ Value, Label, PlaceHolder, Name, isMobile }) {
 			onChange={handleChange}
 			onFocus={handleFocus}
 			onBlur={handleBlur}
+			error={err}
+			helperText={helperTxt}
 		/>
 	);
 }

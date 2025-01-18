@@ -12,10 +12,10 @@ import CPBl from "../data/belgique.json";
 import MyRadio from "../components/Fields/MyRadio.jsx";
 import MySelect from "../components/Fields/MySelect.jsx";
 import MyPhone from "../components/Fields/MyPhone.jsx";
-import MyMobile from "../components/Fields/MyMobile.jsx";
+// import MyMobile from "../components/Fields/MyMobile.jsx";
 import MyEmail from "../components/Fields/MyEmail.jsx";
 import MyConfirmation from "../components/Fields/MyConfirmation.jsx";
-import PhoneIcon from "@mui/icons-material/Phone";
+// import PhoneIcon from "@mui/icons-material/Phone";
 
 const initialValues = {
 	civilité: "male",
@@ -453,11 +453,13 @@ export default function Register() {
 
 						<Grid item>
 							<MyPhone
-								Label={t("phone")}
+								Label={t("Mobile ")}
 								PlaceHolder={t("phone")}
 								Name="phone"
 								Value={values.phone}
 								isMobile={true}
+								Error={!!errors.confirmation}
+								HelperText={errors.confirmation}
 							/>
 							{/* <MyMobile
 								Value={values.mobile}
@@ -474,9 +476,9 @@ export default function Register() {
 
 						<Grid item>
 							<MyEmail
+								Name="email"
 								Value={values.email}
 								OnChange={handleChange}
-								Name="email"
 								Error={!!errors.email}
 								HelperText={errors.email}
 							/>
@@ -489,6 +491,10 @@ export default function Register() {
 								Name="email"
 								Error={!!errors.confirmation}
 								HelperText={errors.confirmation}
+								type="text"
+								// onpaste="return false;"
+								// ondrop="return false;"
+								// autocomplete="off"
 							/>
 						</Grid>
 					</Grid>

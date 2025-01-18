@@ -9,12 +9,12 @@ export default function MyEmail({ Name, Value, OnChange, Error, HelperText }) {
 		<IconField
 			val={Value}
 			onChange={OnChange}
-			error={Error}
-			helperText={HelperText}
 			Label={t("email") + " *"}
 			Placeholder={t("email") + " *"}
 			Name={Name}
 			Start={<AlternateEmailIcon />}
+			error={Error}
+			helperText={HelperText}
 		/>
 	);
 }
