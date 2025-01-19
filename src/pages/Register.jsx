@@ -15,6 +15,7 @@ import MyPhone from "../components/Fields/MyPhone.jsx";
 // import MyMobile from "../components/Fields/MyMobile.jsx";
 import MyEmail from "../components/Fields/MyEmail.jsx";
 import MyConfirmation from "../components/Fields/MyConfirmation.jsx";
+import MyTextField from "../components/Fields/MyTextField.jsx";
 // import PhoneIcon from "@mui/icons-material/Phone";
 
 const initialValues = {
@@ -279,37 +280,28 @@ export default function Register() {
 						</Grid>
 
 						<Grid item>
-							<TextField
-								InputLabelProps={{
-									style: { fontWeight: 600 },
-								}}
-								variant="outlined"
-								label={t("firstName") + " *"}
-								placeholder={t("firstName")}
-								// name={t("firstName")}
-								name="prenom"
-								value={values.prenom}
-								onChange={handleInputChange}
-								fullWidth
-								error={!!errors.prenom}
-								helperText={errors.prenom}
+							<MyTextField
+								Variant="outlined"
+								Label={t("firstName") + " *"}
+								Placeholder={t("firstName")}
+								Name="prenom"
+								Value={values.prenom}
+								OnChange={handleInputChange}
+								Error={!!errors.prenom}
+								HelperText={errors.prenom}
 							/>
 						</Grid>
 
 						<Grid item>
-							<TextField
-								InputLabelProps={{
-									style: { fontWeight: 600 },
-								}}
-								variant="outlined"
-								label={t("lastName") + " *"}
-								placeholder={t("lastName")}
-								name="nom"
-								value={values.nom}
-								onChange={handleInputChange}
-								fullWidth
-								error={!!errors.nom}
-								helperText={errors.nom}
+							<MyTextField
+								Variant="outlined"
+								Label={t("lastName") + " *"}
+								Placeholder={t("lastName")}
+								Name="nom"
+								Value={values.nom}
+								OnChange={handleInputChange}
+								Error={!!errors.nom}
+								HelperText={errors.nom}
 							/>
 						</Grid>
 
@@ -382,65 +374,53 @@ export default function Register() {
 							</Grid>
 
 							<Grid item xs={3.5} sm={3.5}>
-								<TextField
-									InputLabelProps={{
-										style: { fontWeight: 600 },
-									}}
+								<MyTextField
+									Variant="outlined"
 									label={t("CP")}
+									Placeholder={t("CP")}
 									variant="outlined"
-									disabled
+									name="CP"
+									isDisabled={true}
 									value={values.cp}
-									// sx={{ width: "27%" }}
 								/>
 							</Grid>
 						</Grid>
 						{/* </Grid> */}
 						<Grid container item sx={{ justifyContent: "space-between" }}>
 							<Grid item xs={5.9} sm={5.8}>
-								<TextField
-									slotProps={{
-										style: { fontWeight: 600 },
-									}}
-									variant="outlined"
-									label={t("number") + "*"}
-									placeholder={t("number")}
-									name="number"
-									value={values.numéro}
-									fullWidth
-									error={!!errors.numero}
-									helperText={errors.numero}
+								<MyTextField
+									Variant="outlined"
+									Label={t("number") + "*"}
+									Placeholder={t("number")}
+									Name="number"
+									Value={values.numéro}
+									OnChange={handleInputChange}
+									Error={!!errors.numero}
+									HelperText={errors.numero}
 								/>
 							</Grid>
 
 							<Grid item xs={5.9} sm={5.8}>
-								<TextField
-									InputLabelProps={{
-										style: { fontWeight: 600 },
-									}}
-									variant="outlined"
-									label={t("box")}
-									placeholder={t("box")}
-									name="boîte"
-									value={values.boîte}
-									onChange={handleInputChange}
-									fullWidth
+								<MyTextField
+									Variant="outlined"
+									Label={t("box")}
+									Placeholder={t("box")}
+									Name="boîte"
+									Value={values.boîte}
+									OnChange={handleInputChange}
 								/>
 							</Grid>
 						</Grid>
 						<Grid item>
-							<TextField
-								InputLabelProps={{
-									style: { fontWeight: 600 },
-								}}
-								variant="outlined"
-								label={t("adress") + "*"}
-								placeholder={t("adress")}
-								name="adresse"
-								value={values.adresse}
-								onChange={handleInputChange}
-								fullWidth
-								error={!!errors.adresse}
-								helperText={errors.adresse}
+							<MyTextField
+								Variant="outlined"
+								Label={t("adress") + "*"}
+								Placeholder={t("adress")}
+								Name="adresse"
+								Value={values.adresse}
+								OnChange={handleInputChange}
+								Error={!!errors.adresse}
+								HelperText={errors.adresse}
 							/>
 						</Grid>
 
