@@ -31,25 +31,23 @@ const initialValues = {
 	numero: "",
 	boite: "",
 	adresse: "",
+	Prefix: "+33",
 	telephone: "",
 	email: "",
 	confirmation: "",
 };
 export default function Register() {
-	const [values, setValues] = useState(initialValues);
 	// const [country, setCountry] = useState("France");
+	// const [CP, setCP] = useState("");
+	// let Prefix;
+	const { t } = useTranslation();
+	const [values, setValues] = useState(initialValues);
 	const [cities, setCities] = useState([]);
 	const [inputValue, setInputValue] = useState("");
-	// const [CP, setCP] = useState("");
-	const { t } = useTranslation();
 
-	const countries = [
-		{ value: "france", label: t("CountFr"), data: CPFr },
-		{ value: "belgique", label: t("CountBel"), data: CPBl },
-	];
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		console.log(name, value);
+
 		setValues({
 			...values,
 			[name]: value,
@@ -69,16 +67,21 @@ export default function Register() {
 		}));
 		// validate();
 		/////////////////////////////charger les villes
-		const selectedCountry = countries.find(
-			(country) => country.value === value
-		);
+		// const selectedCountry = countries.find(
+		// 	(country) => country.value === value
+		// );
 
-		if (selectedCountry) {
-			setCities(selectedCountry.data);
-			setInputValue("");
-		} else {
-			setCities([]);
-		}
+		// if (selectedCountry) {
+		// 	setCities(selectedCountry.data);
+		// 	setPrefix(selectedCountry.prefix);
+		// 	setValues({
+		// 		...values,
+		// 		[prefix]: selectedCountry.Prefix,
+		// 	});
+		// 	// setInputValue("");
+		// } else {
+		// 	setCities([]);
+		// }
 	}; ////////////////////////////////////////////////////
 
 	const handleCityChange = (event, newValue) => {
@@ -89,6 +92,46 @@ export default function Register() {
 				cp: newValue.code,
 			});
 		}
+	};
+
+	// const [selectedCountry, setSelectedCountry] = useState(countries[0]);
+
+	// const handleCountryChange = (event) => {
+	// 	const countryValue = event.target.value;
+	// 	console.log("countryvalue", countryValue);
+	// 	const selected = countries.find(
+	// 		(country) => country.value === countryValue
+	// 	);
+	// 	setSelectedCountry(selected);
+	// };
+
+	const countries = [
+		{ value: "France", label: t("CountFr"), data: CPFr, prefix: "+33" },
+		{ value: "Belgique", label: t("CountBel"), data: CPBl, prefix: "+32" },
+
+		{ value: "aaaaa", label: t("aaaaaa"), prefix: "+34" },
+	];
+
+	const [prefix, setPrefix] = useState(countries[0].prefix);
+	const [selectedCountry, setSelectedCountry] = useState("");
+
+	const handleCountryChange = (event) => {
+		const selectedCount = event.target.value;
+		// setSelectedCountry(selectedCount);
+		// console.log("selectedCount", selectedCount);
+
+		const country = countries.find((e) => e.value === selectedCount);
+
+		console.log("country", country);
+		setPrefix(country.prefix);
+
+		// setValues({
+		// 	...values,
+		// 	prefix: country.prefix,
+		// });
+
+		console.log("prefixaaaa", country.prefix);
+		console.log("prefixbbbbbb", values.Prefix);
 	};
 
 	///////////////////Validation//////////////////////////////////////////
@@ -221,16 +264,6 @@ export default function Register() {
 		},
 	];
 
-	const CountrySelect = [
-		{
-			label: t("CountFr"),
-			value: "CountFr",
-		},
-		{
-			label: t("CountBel"),
-			value: "CountBel",
-		},
-	];
 	/////////////////////////////////////////////////////////
 	return (
 		<div>
@@ -329,9 +362,11 @@ export default function Register() {
 
 						<Grid item>
 							<MySelect
-								Options={CountrySelect}
+								Options={countries}
 								Label={t("Country")}
-								Default="CountFr"
+								// value={selectedCountry}
+								// Default="CountFr"
+								OnChange={handleCountryChange}
 								error={!!errors.country}
 								helperText={errors.country}
 								// isDisabled={true}
@@ -431,16 +466,19 @@ export default function Register() {
 								Name="phone"
 								Value={values.phone}
 								isMobile={false}
+								Prefix={prefix}
 							/>
 						</Grid>
 
 						<Grid item>
 							<MyPhone
 								Label={t("Mobile ")}
-								PlaceHolder={t("phone")}
+								PlaceHolder={t("Mobile")}
 								Name="phone"
 								Value={values.phone}
 								isMobile={true}
+								Prefix={prefix}
+								// handleChange={prefix}
 								Error={!!errors.confirmation}
 								HelperText={errors.confirmation}
 							/>
@@ -470,6 +508,7 @@ export default function Register() {
 							/>
 						</Grid>
 					</Grid>
+					{/* <TextField /> */}
 					{/* Submit */}
 					<Grid item>
 						<Button

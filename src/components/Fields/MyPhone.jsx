@@ -13,7 +13,9 @@ export default function MyPhone({
 	isMobile,
 	Error,
 	HelperText,
+	Prefix,
 }) {
+	console.log("prefix", Prefix);
 	// const { t } = useTranslation();
 	const [phoneValue, setPhoneValue] = useState(Value || "");
 
@@ -32,7 +34,6 @@ export default function MyPhone({
 			setPhoneValue(inputValue);
 		}
 		if (inputValue.length >= 13) {
-			console.log(inputValue.length, inputValue);
 			setErr(false);
 			setHelperTxt("");
 		} else {
@@ -43,13 +44,13 @@ export default function MyPhone({
 
 	const handleFocus = () => {
 		if (!phoneValue) {
-			setPhoneValue("+33");
+			setPhoneValue(Prefix);
 		}
 	};
 
 	const handleBlur = () => {
 		console.log("Blur");
-		if (phoneValue === "+33") {
+		if (phoneValue === Prefix) {
 			setPhoneValue("");
 		}
 	};

@@ -13,7 +13,7 @@ export default function MyConfirmation({
 	const preventClipboardActions = (e) => {
 		e.preventDefault();
 	};
-	console.log(onPaste);
+	// console.log(onPaste);
 	const { t } = useTranslation();
 	return (
 		<IconField

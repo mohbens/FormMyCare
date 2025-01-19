@@ -1,5 +1,5 @@
 import { InputAdornment, TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 export default function IconField(props) {
 	const {
@@ -19,27 +19,58 @@ export default function IconField(props) {
 		OnCut,
 	} = props;
 	// console.log(error, helperText);
+	const [isFocused, setIsFocused] = useState(false);
+
+	const handleFocus = () => {
+		setIsFocused(true);
+		if (typeof onFocus === "function") {
+			onFocus();
+		}
+	};
+	const handleBlur = () => {
+		setIsFocused(false);
+		if (typeof onBlur === "function") {
+			onBlur();
+		}
+	};
+
 	return (
 		<TextField
+			slotProps={{
+				inputLabel: {
+					shrink: isFocused,
+				},
+				input: {
+					startAdornment: Start && (
+						<InputAdornment position="start">{Start}</InputAdornment>
+					),
+					endAdornment: End && (
+						<InputAdornment position="end">{End}</InputAdornment>
+					),
+				},
+			}}
+			focused={false}
+			// shrink={true}
+			// size={"normal"}
 			onChange={onChange}
 			variant="outlined"
 			label={Label}
 			placeholder={Placeholder}
 			name={Name}
 			value={val}
-			onFocus={onFocus}
-			InputProps={{
-				startAdornment: Start && (
-					<InputAdornment position="start">{Start}</InputAdornment>
-				),
-				endAdornment: End && (
-					<InputAdornment position="end">{End}</InputAdornment>
-				),
-			}}
+			onFocus={handleFocus}
+			// InputProps={{
+			// 	startAdornment: Start && (
+			// 		<InputAdornment position="start">{Start}</InputAdornment>
+			// 	),
+			// 	endAdornment: End && (
+			// 		<InputAdornment position="end">{End}</InputAdornment>
+			// 	),
+			// }}
 			fullWidth
 			error={error}
 			helperText={helperText}
-			onBlur={onBlur}
+			onBlur={handleBlur}
 			onCopy={Oncopy}
 			onPaste={Onpaste}
 			onCut={OnCut}

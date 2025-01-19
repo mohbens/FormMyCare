@@ -12,7 +12,7 @@ export default function MySelect({
 	Error,
 	HelperText,
 }) {
-	console.log("option", Options, "Default", Default);
+	// console.log("option", Options, "Default", Default);
 	return (
 		<FormControl fullWidth>
 			<InputLabel id="my-select-label">{Label}</InputLabel>
