@@ -1,6 +1,6 @@
 import "./App.css";
 import { ThemeProvider } from "@mui/material";
-import Register from "./pages/Register.jsx";
+import Register from "./pages/register.jsx";
 import Login from "./pages/Login.jsx";
 import Forgot from "./pages/Forgot.jsx";
 import Test from "./data/test.jsx";
@@ -21,7 +21,7 @@ const theme = createTheme({
 			styleOverrides: {
 				root: {
 					"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-						borderColor: "blue", // Focused border color
+						borderColor: "blue",
 					},
 				},
 			},
@@ -29,9 +29,9 @@ const theme = createTheme({
 		MuiInputLabel: {
 			styleOverrides: {
 				outlined: {
-					color: "gray", // Default label color
+					color: "gray",
 					"&.Mui-focused": {
-						color: "blue", // Label color when focused
+						color: "blue",
 					},
 				},
 			},

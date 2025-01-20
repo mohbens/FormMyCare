@@ -14,7 +14,7 @@ export default function MyTextField({
 }) {
 	return (
 		<TextField
-			shrink={false}
+			// shrink={false}
 			slotProps={{
 				style: { fontWeight: 600 },
 			}}

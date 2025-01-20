@@ -36,10 +36,21 @@ export default function IconField(props) {
 
 	return (
 		<TextField
+			sx={(theme) => ({
+				"& .MuiOutlinedInput-notchedOutline": {
+					px: 5.5,
+				},
+			})}
+			label={Label}
 			slotProps={{
 				inputLabel: {
 					shrink: isFocused,
+
+					sx: {
+						ml: "35px",
+					},
 				},
+
 				input: {
 					startAdornment: Start && (
 						<InputAdornment position="start">{Start}</InputAdornment>
@@ -49,24 +60,13 @@ export default function IconField(props) {
 					),
 				},
 			}}
-			focused={false}
-			// shrink={true}
-			// size={"normal"}
+			// focused={false}
 			onChange={onChange}
 			variant="outlined"
-			label={Label}
 			placeholder={Placeholder}
 			name={Name}
 			value={val}
 			onFocus={handleFocus}
-			// InputProps={{
-			// 	startAdornment: Start && (
-			// 		<InputAdornment position="start">{Start}</InputAdornment>
-			// 	),
-			// 	endAdornment: End && (
-			// 		<InputAdornment position="end">{End}</InputAdornment>
-			// 	),
-			// }}
 			fullWidth
 			error={error}
 			helperText={helperText}

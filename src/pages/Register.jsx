@@ -2,7 +2,7 @@ import { Autocomplete, Button, TextField, styled } from "@mui/material";
 import React, { useState } from "react";
 import "../styles/register.css";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import "../utils/i18n";
+import "../utils/i18n.js";
 import PublicPage from "../components/PublicPage.jsx";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -317,7 +317,7 @@ export default function Register() {
 								Variant="outlined"
 								Label={t("firstName") + " *"}
 								Placeholder={t("firstName")}
-								Name="prenom"
+								Name="prenoma"
 								Value={values.prenom}
 								OnChange={handleInputChange}
 								Error={!!errors.prenom}
@@ -365,7 +365,7 @@ export default function Register() {
 								Options={countries}
 								Label={t("Country")}
 								// value={selectedCountry}
-								// Default="CountFr"
+								Default="french"
 								OnChange={handleCountryChange}
 								error={!!errors.country}
 								helperText={errors.country}
