@@ -138,6 +138,7 @@ export default function Register() {
 	//Numero regex
 	const [errors, setErrors] = useState({});
 	const NumRegex = /^[0-9]{10,}$/;
+	const NumRegexa = /^[0-9]{10,}$/;
 
 	const validateEmail = (email) => {
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -6,6 +6,7 @@ import Forgot from "./pages/Forgot.jsx";
 import Test from "./data/test.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { createTheme } from "@mui/material/styles";
+import ResetPsw from "./pages/ResetPsw.jsx";
 
 const theme = createTheme({
 	palette: {
@@ -60,6 +61,10 @@ function App() {
 		{
 			path: "/Test",
 			element: <Test />,
+		},
+		{
+			path: "/reset-password",
+			element: <ResetPsw />,
 		},
 	]);
 

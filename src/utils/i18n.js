@@ -56,6 +56,18 @@ const resources = {
 			btnForgot: "RESET",
 			ForgotLink1: "Log In",
 			ForgotLink2: "Not a member yet ?",
+			/////////////////ResetPsw///////////////////////
+			titlePReset: "Reset password",
+			TextRstPsw:
+				"Please enter a new password that meets the following requirements:",
+			Req12: "At least 12 characters",
+			ReqUprCase: "At least 1 uppercase letter",
+			ReqLwrCase: "At least 1 lowercase letter",
+			ReqDigit: "At least 1 digit",
+			ReqSpetial: "At least 1 special character",
+			ReqMatchPsw: "Confirmation must match the password",
+			ResetBtn: "SEND",
+
 			////////////////errors//////////////////
 			Required: "Required field",
 			InvalidEmail: "Invalid email",
@@ -112,6 +124,18 @@ const resources = {
 			btnForgot: "Réinitialiser",
 			ForgotLink1: "S'identifier",
 			ForgotLink2: "Pas encore membre?",
+			/////////////////ResetPsw///////////////////////
+			titlePReset: "Réinitialiser le mot de passe",
+			TextRstPsw:
+				"Veuillez renseigner un nouveau mot de passe qui respecte les contraintes suivantes:",
+			Req12: "Au moins 12 caractères",
+			ReqUprCase: "Au moins 1 majuscule",
+			ReqLwrCase: "Au moins 1 minuscule",
+			ReqDigit: "Au moins 1 chiffre",
+			ReqSpetial: "Au moins 1 caractère spécial",
+			ReqMatchPsw: "La confirmation doit correspondre au mot de passe",
+			ResetBtn: "ENVOYER",
+
 			////////////////errors//////////////////
 			Required: "champ requis",
 			InvalidEmail: "email invalide",
