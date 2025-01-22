@@ -37,9 +37,6 @@ const initialValues = {
 	confirmation: "",
 };
 export default function Register() {
-	// const [country, setCountry] = useState("France");
-	// const [CP, setCP] = useState("");
-	// let Prefix;
 	const { t } = useTranslation();
 	const [values, setValues] = useState(initialValues);
 	const [cities, setCities] = useState([]);
@@ -65,23 +62,6 @@ export default function Register() {
 			ville: "",
 			cp: "",
 		}));
-		// validate();
-		/////////////////////////////charger les villes
-		// const selectedCountry = countries.find(
-		// 	(country) => country.value === value
-		// );
-
-		// if (selectedCountry) {
-		// 	setCities(selectedCountry.data);
-		// 	setPrefix(selectedCountry.prefix);
-		// 	setValues({
-		// 		...values,
-		// 		[prefix]: selectedCountry.Prefix,
-		// 	});
-		// 	// setInputValue("");
-		// } else {
-		// 	setCities([]);
-		// }
 	}; ////////////////////////////////////////////////////
 
 	const handleCityChange = (event, newValue) => {
@@ -94,41 +74,21 @@ export default function Register() {
 		}
 	};
 
-	// const [selectedCountry, setSelectedCountry] = useState(countries[0]);
-
-	// const handleCountryChange = (event) => {
-	// 	const countryValue = event.target.value;
-	// 	console.log("countryvalue", countryValue);
-	// 	const selected = countries.find(
-	// 		(country) => country.value === countryValue
-	// 	);
-	// 	setSelectedCountry(selected);
-	// };
-
 	const countries = [
 		{ value: "France", label: t("CountFr"), data: CPFr, prefix: "+33" },
 		{ value: "Belgique", label: t("CountBel"), data: CPBl, prefix: "+32" },
-
-		{ value: "aaaaa", label: t("aaaaaa"), prefix: "+34" },
 	];
 
 	const [prefix, setPrefix] = useState(countries[0].prefix);
-	const [selectedCountry, setSelectedCountry] = useState("");
+	// const [selectedCountry, setSelectedCountry] = useState("");
 
 	const handleCountryChange = (event) => {
 		const selectedCount = event.target.value;
-		// setSelectedCountry(selectedCount);
-		// console.log("selectedCount", selectedCount);
 
 		const country = countries.find((e) => e.value === selectedCount);
 
 		console.log("country", country);
 		setPrefix(country.prefix);
-
-		// setValues({
-		// 	...values,
-		// 	prefix: country.prefix,
-		// });
 
 		console.log("prefixaaaa", country.prefix);
 		console.log("prefixbbbbbb", values.Prefix);
@@ -281,11 +241,7 @@ export default function Register() {
 						display={"grid"}
 						gridTemplateColumns={"1fr 1fr"}
 						gap={2}
-						container
-						// spacing={2}
-						// justifyContent="center"
-						// alignItems="flex-start"
-					>
+						container>
 						<Grid item>
 							<MyRadio
 								Options={GenderRadio}

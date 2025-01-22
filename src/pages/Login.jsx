@@ -88,24 +88,6 @@ export default function Login() {
 							Error={!!errors.email}
 							HelperText={errors.email}
 						/>
-						{/* <TextField
-						name="email"
-						label={t("email") + "*"}
-						value={values.email}
-						onChange={handleInputChange}
-						sx={{ width: "100%", mb: 2 }}
-						slotProps={{
-							input: {
-								startAdornment: (
-									<InputAdornment position="start">
-										<AlternateEmailIcon />
-									</InputAdornment>
-								),
-							},
-						}}
-						error={!!errors.email}
-						helperText={errors.email}
-					/> */}
 
 						<Box>
 							<MyPswrd
@@ -115,39 +97,6 @@ export default function Login() {
 								Error={!!errors.password}
 								HelperText={errors.password}
 							/>
-							{/* <FormControl sx={{ width: "100%" }} variant="outlined">
-								<InputLabel htmlFor="outlined-adornment-password">
-									{t("psw") + "*"}
-								</InputLabel>
-								<OutlinedInput
-									name="password"
-									value={values.password}
-									onChange={handleInputChange}
-									error={!!errors.password}
-									helperText={errors.password}
-									label={t("psw") + "*"}
-									id="outlined-adornment-password"
-									type={showPassword ? "text" : "password"}
-									startAdornment={
-										<InputAdornment position="start">
-											<VpnKeyIcon />
-										</InputAdornment>
-									}
-									endAdornment={
-										<InputAdornment position="end">
-											<IconButton
-												onClick={handleClickShowPassword}
-												onMouseDown={handleMouseDownPassword}
-												edge="end">
-												{showPassword ? <VisibilityOff /> : <Visibility />}
-											</IconButton>
-										</InputAdornment>
-									}
-								/>
-								<FormHelperText id="password-helper-text" error>
-									{errors.password}
-								</FormHelperText>
-							</FormControl> */}
 						</Box>
 					</Grid>
 

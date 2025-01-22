@@ -25,13 +25,7 @@ export default function Forgot() {
 
 		return Object.values(tempErrors).every((x) => x === "");
 	};
-	// const handleInputChange = (e) => {
-	// 	const { name, value } = e.target;
-	// 	setValues({
-	// 		...values,
-	// 		[name]: value,
-	// 	});
-	// };
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		console.log(name, value);
