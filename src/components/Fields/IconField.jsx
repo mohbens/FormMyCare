@@ -20,7 +20,7 @@ export default function IconField(props) {
 	} = props;
 	// console.log(error, helperText);
 	const [isFocused, setIsFocused] = useState(false);
-
+	const isValuePresent = val !== "";
 	const handleFocus = () => {
 		setIsFocused(true);
 		if (typeof onFocus === "function") {
@@ -44,7 +44,7 @@ export default function IconField(props) {
 			label={Label}
 			slotProps={{
 				inputLabel: {
-					shrink: isFocused,
+					shrink: isFocused || isValuePresent,
 
 					sx: {
 						ml: "35px",
