@@ -52,6 +52,8 @@ export default function MyPhone({
 		console.log("Blur");
 		if (phoneValue === Prefix) {
 			setPhoneValue("");
+		} else {
+			setPhoneValue(phoneValue);
 		}
 	};
 

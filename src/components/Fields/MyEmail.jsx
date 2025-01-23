@@ -3,8 +3,16 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import IconField from "./IconField";
 
-export default function MyEmail({ Name, Value, OnChange, Error, HelperText }) {
+export default function MyEmail({
+	Name,
+	Value,
+	OnChange,
+	Error,
+	HelperText,
+	onBlur,
+}) {
 	const { t } = useTranslation();
+
 	return (
 		<IconField
 			val={Value}
